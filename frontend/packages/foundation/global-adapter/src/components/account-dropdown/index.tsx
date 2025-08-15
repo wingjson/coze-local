@@ -59,15 +59,15 @@ export const AccountDropdown = () => {
           },
           dataTestId: 'layout_avatar_profile-settings',
         },
-        <Dropdown.Divider />,
-        {
-          prefixIcon: <IconCozExit />,
-          title: I18n.t('basic_log_out'),
-          onClick: () => {
-            openLogoutModal();
-          },
-          dataTestId: 'layout_avatar_logout-button',
-        },
+        // <Dropdown.Divider />,
+        // {
+        //   prefixIcon: <IconCozExit />,
+        //   title: I18n.t('basic_log_out'),
+        //   onClick: () => {
+        //     openLogoutModal();
+        //   },
+        //   dataTestId: 'layout_avatar_logout-button',
+        // },
       ]}
       visible={visible}
       onVisibleChange={setVisible}
