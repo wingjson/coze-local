@@ -23,11 +23,12 @@ import { reportNavClick } from '../utils';
 import { type LayoutMenuItem } from '../types';
 
 const menuStyle = classNames(
-  'w-[60px] h-[48px]',
-  'flex flex-col items-center justify-center',
+  'w-[200px] h-[50px]',
+  'flex items-center justify-start',
   'rounded-[6px]',
   'transition-all',
   'hover:coz-mg-primary-hovered',
+  'pl-2'
 );
 
 export const GLobalLayoutMenuItem: FC<LayoutMenuItem> = ({
@@ -75,11 +76,11 @@ export const GLobalLayoutMenuItem: FC<LayoutMenuItem> = ({
         )}
         id={navId}
       >
-        <div className="text-[20px] leading-none">
+        <div className="text-[20px] leading-none flex items-center justify-center">
           {isActive ? activeIcon : icon}
         </div>
-        <div className="mt-[2px] h-[14px] font-[500] flex items-center justify-center overflow-hidden leading-none overflow-hidden w-full">
-          <span className="text-[20px] scale-50 whitespace-nowrap">
+        <div className="font-[500] ml-4 flex items-center overflow-hidden leading-none overflow-hidden w-full">
+          <span className="text-[16px] whitespace-nowrap">
             {title}
           </span>
         </div>
