@@ -87,6 +87,9 @@
       "path": "../layout/tsconfig.build.json"
     },
     {
+      "path": "../space-store/tsconfig.build.json"
+    },
+    {
       "path": "../../studio/open-platform/open-auth/tsconfig.build.json"
     },
     {
