@@ -22,6 +22,7 @@ import { useCreateBotAction } from '@coze-foundation/global';
 import { RequireAuthContainer } from '@coze-foundation/account-ui-adapter';
 import { I18n } from '@coze-arch/i18n';
 import { useRouteConfig } from '@coze-arch/bot-hooks';
+import { useSpaceStore } from '@coze-foundation/space-store';
 import {
   IconCozPlusCircle,
   IconCozWorkspace,
@@ -29,6 +30,10 @@ import {
   IconCozCompass,
   IconCozCompassFill,
   IconCozDocument,
+  IconCozBot,
+  IconCozBotFill,
+  IconCozKnowledge,
+  IconCozKnowledgeFill,
 } from '@coze-arch/coze-design/icons';
 
 import { AccountDropdown } from '../account-dropdown';
@@ -38,7 +43,7 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
   const config = useRouteConfig();
   const hasSider = useHasSider();
   const { space_id } = useParams();
-
+  const personalSpaceID = useSpaceStore.getState().getPersonalSpaceID();
   const { createBot, createBotModal } = useCreateBotAction({
     currentSpaceId: space_id,
   });
@@ -53,39 +58,70 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
         banner={null}
         actions={[
           {
-            tooltip: I18n.t('creat_tooltip_create'),
             icon: <IconCozPlusCircle />,
             onClick: createBot,
             dataTestId: 'layout_create-agent-button',
+            className: '!w-[200px] !h-[35px] !bg-[#2585fb]',
+            label: '创建智能体',
+            iconClass: '!text-white flex items-center gap-x-2',
           },
         ]}
         menus={[
-          {
-            title: I18n.t('navigation_workspace'),
-            icon: <IconCozWorkspace />,
-            activeIcon: <IconCozWorkspaceFill />,
-            path: '/space',
-            dataTestId: 'layout_workspace-button',
+          // {
+          //   title: I18n.t('navigation_workspace'),
+          //   icon: <IconCozWorkspace />,
+          //   activeIcon: <IconCozWorkspaceFill />,
+          //   path: '/space',
+          //   dataTestId: 'layout_workspace-button',
+          // },
+          // {
+          //   title: I18n.t('menu_title_store'),
+          //   icon: <IconCozCompass />,
+          //   activeIcon: <IconCozCompassFill />,
+          //   path: '/explore',
+          //   dataTestId: 'layout_explore-button',
+          // },
+           {
+            icon: <IconCozBot />,
+            activeIcon: <IconCozBotFill />,
+            title: I18n.t('menu_title_myagent'),
+            path: `/space/${personalSpaceID}/develop`,
+            dataTestId: 'navigation_workspace_develop',
           },
           {
-            title: I18n.t('menu_title_store'),
+            icon: <IconCozKnowledge />,
+            activeIcon: <IconCozKnowledgeFill />,
+            title: I18n.t('menu_title_knowledge'),
+            path: `/space/${personalSpaceID}/library`,
+            dataTestId: 'navigation_workspace_library',
+          },
+           {
+            title: I18n.t('menu_title_tmpl'),
             icon: <IconCozCompass />,
             activeIcon: <IconCozCompassFill />,
-            path: '/explore',
+            path: '/explore/template',
             dataTestId: 'layout_explore-button',
           },
-        ]}
-        extras={[
-          {
-            icon: <IconCozDocument />,
-            tooltip: I18n.t('menu_documents'),
-            onClick: () => {
-              // cp-disable-next-line
-              window.open('https://www.coze.cn/open/docs/guides');
-            },
-            dataTestId: 'layout_document-button',
+           {
+            title: I18n.t('menu_title_plug'),
+            icon: <IconCozCompass />,
+            activeIcon: <IconCozCompassFill />,
+            path: '/explore/plugin',
+            dataTestId: 'layout_explore-button',
           },
+         
         ]}
+        // extras={[
+        //   {
+        //     icon: <IconCozDocument />,
+        //     tooltip: I18n.t('menu_documents'),
+        //     onClick: () => {
+        //       // cp-disable-next-line
+        //       window.open('https://www.coze.cn/open/docs/guides');
+        //     },
+        //     dataTestId: 'layout_document-button',
+        //   },
+        // ]}
         footer={<AccountDropdown />}
       >
         {children}
