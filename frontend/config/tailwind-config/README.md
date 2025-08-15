@@ -213,7 +213,7 @@ The package uses CSS variables for theming:
 
 ```css
 :root {
-  --coze-brand-5: 81, 71, 255;
+  --coze-brand-5: 71,128,255;
   --coze-fg-3: 15, 21, 40;
   --coze-bg-1: 247, 247, 252;
 }
