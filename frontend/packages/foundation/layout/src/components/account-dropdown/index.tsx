@@ -63,7 +63,7 @@ export const GlobalLayoutAccountDropdown: FC<
   onVisibleChange,
 }) => {
   const userInfo = useUserInfo();
-
+  console.log(userInfo);
   if (!userInfo) {
     return null;
   }
@@ -116,6 +116,7 @@ export const GlobalLayoutAccountDropdown: FC<
           className={classNames(
             'relative',
             'p-[4px] rounded-[8px] transition-colors hover:coz-mg-secondary-hovered',
+            'flex items-center gap-x-2 justify-left',
             'leading-none',
             visible && 'coz-mg-secondary-hovered',
           )}
@@ -139,6 +140,7 @@ export const GlobalLayoutAccountDropdown: FC<
               className={classNames('w-[32px] h-[32px] rounded-full')}
             />
           </Badge>
+          {userInfo.user_unique_name}
           {userTips}
         </div>
       </Dropdown>
