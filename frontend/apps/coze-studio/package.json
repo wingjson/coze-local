@@ -47,7 +47,8 @@
     "react-dom": "~18.2.0",
     "react-error-boundary": "^4.0.9",
     "react-router-dom": "^6.11.1",
-    "zustand": "^4.4.7"
+    "zustand": "^4.4.7",
+    "qiankun": "~2.10.16"
   },
   "devDependencies": {
     "@coze-arch/bot-env": "workspace:*",
