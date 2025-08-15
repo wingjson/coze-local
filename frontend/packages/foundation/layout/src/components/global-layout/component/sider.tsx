@@ -76,7 +76,7 @@ export const GlobalLayoutSider: FC<Omit<LayoutProps, 'hasSider'>> = ({
               <GLobalLayoutMenuItem {...menu} key={index} />
             ))}
           </Space>
-          <Space spacing={4} vertical className="mt-[12px]">
+          <Space spacing={4} vertical className="mt-[12px] w-full !items-start">
             {extras?.map((extra, index) => (
               <GlobalLayoutActionBtn {...extra} key={index} />
             ))}
@@ -84,7 +84,7 @@ export const GlobalLayoutSider: FC<Omit<LayoutProps, 'hasSider'>> = ({
           </Space>
         </div>
         {/* secondary navigation */}
-        <SubMenu />
+        {/* <SubMenu /> */}
       </div>
     </div>
   );

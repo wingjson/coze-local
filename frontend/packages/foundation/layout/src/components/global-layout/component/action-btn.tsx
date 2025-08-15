@@ -31,6 +31,7 @@ export const GlobalLayoutActionBtn: FC<LayoutButtonItem> = ({
   className,
   portal,
   renderButton,
+  label,
 }) => {
   const [visible, setVisible] = useState(false);
 
@@ -50,7 +51,7 @@ export const GlobalLayoutActionBtn: FC<LayoutButtonItem> = ({
     <IconButton
       color="secondary"
       size="large"
-      className={classNames(className, { '!h-full': !!iconClass })}
+      className={classNames(className, { 'h-full': !!iconClass })}
       icon={
         <div
           className={classNames(
@@ -59,6 +60,7 @@ export const GlobalLayoutActionBtn: FC<LayoutButtonItem> = ({
           )}
         >
           {icon}
+          {label && <span className="text-sm font-medium">{label}</span>}
         </div>
       }
       onClick={onButtonClick}
