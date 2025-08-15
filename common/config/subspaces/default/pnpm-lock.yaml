@@ -16397,6 +16397,9 @@ importers:
       '@coze-foundation/layout':
         specifier: workspace:*
         version: link:../layout
+      '@coze-foundation/space-store':
+        specifier: workspace:*
+        version: link:../space-store
       '@coze-studio/default-slardar':
         specifier: workspace:*
         version: link:../../arch/default-slardar
