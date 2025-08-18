@@ -306,6 +306,7 @@ import { SpaceSubModuleEnum } from '@coze-foundation/space-ui-adapter';
 import { GlobalError } from '@coze-foundation/layout';
 import { BaseEnum } from '@coze-arch/web-context';
 
+
 import { Layout } from '../layout';
 import {
   LoginPage,
@@ -331,11 +332,12 @@ import {
   ExplorePluginPage,
   ExploreTemplatePage,
 } from './async-components';
+import { protectedRouteLoader } from './auth';
 
 // --- [关键修改] ---
 // 根据是否在 qiankun 环境下，动态设置 basename
 const basename = (window as any).__POWERED_BY_QIANKUN__
-  ? '/railchat/tiekerag' // 必须和主应用里配置的 activeRule 一致
+  ? '/railchat/railagent' // 必须和主应用里配置的 activeRule 一致
   : '/';
 // --- [结束修改] ---
 
@@ -370,6 +372,7 @@ const routes = [
       path: '/',
       Component: Layout,
       errorElement: <GlobalError />,
+      loader: protectedRouteLoader,
       children: [
         {
           index: true,
@@ -579,4 +582,3 @@ const routes = [
 
 export const router: ReturnType<typeof createBrowserRouter> =
   createBrowserRouter(routes, { basename: basename });
-// --- [结束修改] ---
