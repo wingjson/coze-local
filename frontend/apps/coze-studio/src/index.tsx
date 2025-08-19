@@ -124,8 +124,26 @@ export async function bootstrap() {
 
 // [新增] 导出 qiankun 的 mount 生命周期
 // 用于在每次应用被激活时执行，负责渲染应用
+let unsubscribeFromStore;
 export async function mount(props: any) {
   console.log('[coze-studio] mount');
+  const { authStore } = props;
+
+  if (authStore) {
+    // 1. **读取初始 token**
+    const currentToken = authStore.token;
+    console.log('[子应用] 首次获取的 token:', currentToken);
+    // 你可以把这个 token 存起来，或者设置到子应用的请求头里
+    // axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
+
+    // 2. **监听 token 变化**
+    unsubscribeFromStore = authStore.$subscribe((mutation, state) => {
+      console.log('[子应用] 监听到 token 变化:', state.token);
+      // 当 token 变化时，执行相应操作（比如更新请求头、跳转页面等）
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
+    });
+  }
+
   render(props);
 }
 
