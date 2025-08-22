@@ -93,6 +93,9 @@ importers:
       '@coze-foundation/layout':
         specifier: workspace:*
         version: link:../../packages/foundation/layout
+      '@coze-foundation/space-store-adapter':
+        specifier: workspace:*
+        version: link:../../packages/foundation/space-store-adapter
       '@coze-foundation/space-ui-adapter':
         specifier: workspace:*
         version: link:../../packages/foundation/space-ui-adapter
