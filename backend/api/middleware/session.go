@@ -35,6 +35,7 @@ import (
 var noNeedSessionCheckPath = map[string]bool{
 	"/api/passport/web/email/login/":       true,
 	"/api/passport/web/email/register/v2/": true,
+	"/api/sso/check-login": true,
 }
 
 func SessionAuthMW() app.HandlerFunc {
