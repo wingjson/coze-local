@@ -74,7 +74,9 @@ import { createRoot, type Root } from 'react-dom/client'; // [修改] 导入 Roo
 import { initI18nInstance } from '@coze-arch/i18n/raw';
 import { dynamicImportMdBoxStyle } from '@coze-arch/bot-md-box-adapter/style';
 import { pullFeatureFlags, type FEATURE_FLAGS } from '@coze-arch/bot-flags';
-
+import { performSsoLogin } from '@coze-foundation/account-ui-adapter';
+import { getLoginStatus, getUserInfo } from '@coze-foundation/foundation-sdk';
+import { useSpaceStore } from '@coze-foundation/space-store-adapter';
 import { App } from './app';
 import './global.less';
 import './index.less';
@@ -106,8 +108,6 @@ const render = (props: any) => {
   root.render(<App />);
 };
 
-// [新增] 导出 qiankun 的 bootstrap 生命周期
-// 用于执行只需要在应用初始化时执行一次的操作
 export async function bootstrap() {
   console.log('[coze-studio] bootstraped');
   // Initialize the value of the function switch
@@ -118,52 +118,43 @@ export async function bootstrap() {
       | 'en'
       | 'zh-CN',
   });
-  // Import mdbox styles dynamically
   dynamicImportMdBoxStyle();
 }
 
-// [新增] 导出 qiankun 的 mount 生命周期
-// 用于在每次应用被激活时执行，负责渲染应用
 let unsubscribeFromStore;
 export async function mount(props: any) {
   console.log('[coze-studio] mount');
   const { authStore } = props;
-
   if (authStore) {
     // 1. **读取初始 token**
+    console.log(getLoginStatus(), 1234456789);
     const currentToken = authStore.token;
-    console.log('[子应用] 首次获取的 token:', currentToken);
-    // 你可以把这个 token 存起来，或者设置到子应用的请求头里
-    // axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
+    useSpaceStore.getState().setRailToken(currentToken);
+    // console.log(
+    //  '[子应用] 首次获取的 token:',
+    //useSpaceStore.getState().railtoken,
+    //);
+    if (getLoginStatus() != 'logined') {
+      const user = await performSsoLogin({
+        ctx: currentToken,
+      });
 
-    // 2. **监听 token 变化**
-    unsubscribeFromStore = authStore.$subscribe((mutation, state) => {
-      console.log('[子应用] 监听到 token 变化:', state.token);
-      // 当 token 变化时，执行相应操作（比如更新请求头、跳转页面等）
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
-    });
+      console.log('[子应用] performSsoLogin 返回的用户:', user);
+    }
   }
 
   render(props);
 }
 
-// [新增] 导出 qiankun 的 unmount 生命周期
-// 用于在每次应用被卸载时执行，负责清理工作
 export async function unmount() {
   console.log('[coze-studio] unmount');
   if (root) {
-    // 卸载 React 组件
     root.unmount();
     root = null;
   }
 }
 
-// [新增] 判断是否在 qiankun 环境下，如果不是，则独立运行
-// 这能保证你的应用可以独立开发和调试
 if (!(window as any).__POWERED_BY_QIANKUN__) {
-  // 独立运行时，手动调用 bootstrap 和 mount
   bootstrap().then(() => mount({}));
 }
 
-// [删除] 原来的 main() 调用需要被删除，因为应用的启动现在由 qiankun 或上面的独立运行逻辑来控制
-// main();

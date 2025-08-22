@@ -369,6 +369,10 @@ func Register(r *server.Hertz) {
 			_plugin_api.POST("/update_plugin_meta", append(_updatepluginmetaMw(), coze.UpdatePluginMeta)...)
 		}
 		{
+			_sso := _api.Group("/sso", _ssoMw()...)
+			_sso.POST("/check-login", append(_checkloginstatuspostMw(), coze.CheckLoginStatusPost)...)
+		}
+		{
 			_user := _api.Group("/user", _userMw()...)
 			_user.POST("/update_profile", append(_userupdateprofileMw(), coze.UserUpdateProfile)...)
 			_user.POST("/update_profile_check", append(_updateuserprofilecheckMw(), coze.UpdateUserProfileCheck)...)

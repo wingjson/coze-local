@@ -18,6 +18,7 @@ include "./upload/upload.thrift"
 include "./admin/config.thrift"
 
 
+include "./sso/sso.thrift"
 
 namespace go coze
 
@@ -38,4 +39,8 @@ service WorkflowService extends workflow_svc.WorkflowService {}
 service KnowledgeService extends knowledge_svc.DatasetService {}
 service BotOpenApiService extends bot_open_api.BotOpenApiService {}
 service UploadService extends upload.UploadService {}
+<<<<<<< HEAD
 service ConfigService extends config.ConfigService {}
+=======
+service SsoService extends sso.SsoService {}
+>>>>>>> 8a0010b8 (feat: add sso login)

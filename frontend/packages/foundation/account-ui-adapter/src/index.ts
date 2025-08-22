@@ -20,4 +20,4 @@ export {
 } from '@coze-foundation/account-ui-base';
 
 export { LoginPage } from './pages/login-page';
-export { performLogin } from './pages/login-page/auth';
+export { performSsoLogin } from './pages/login-page/auth';
