@@ -168,15 +168,18 @@ import path from 'path';
 import { defineConfig } from '@coze-arch/rsbuild-config';
 import { GLOBAL_ENVS } from '@coze-arch/bot-env';
 
-const API_PROXY_TARGET = `http://localhost:${
+// const API_PROXY_TARGET = `http://localhost:${
+//   process.env.WEB_SERVER_PORT || 8888
+// }/`;
+const API_PROXY_TARGET = `http://172.27.115.35:${
   process.env.WEB_SERVER_PORT || 8888
 }/`;
-
+// http://172.25.1.180
 const appName = 'coze-studio';
 
 const mergedConfig = defineConfig({
   server: {
-    // port: 3002, // 为子应用分配一个独立的端口
+    port: 5174, // 为子应用分配一个独立的端口
     strictPort: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -198,7 +201,9 @@ const mergedConfig = defineConfig({
   },
 
   dev: {
-    assetPrefix: true,
+    // assetPrefix: true,
+    assetPrefix: 'http://172.25.1.180:5174/',
+    // assetPrefix: './',
   },
 
   // [注意] 我们已经移除了顶层的 output 配置

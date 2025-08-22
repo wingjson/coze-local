@@ -39,6 +39,7 @@ interface SpaceStoreState {
   recentlyUsedSpaceList: BotSpace[];
   loading: false | Promise<SpaceInfo | undefined>;
   inited?: boolean;
+  railtoken: string | null;
   createdTeamSpaceNum: number; // Count of team spaces created by individuals
   maxTeamSpaceNum: number;
   /** @deprecated spaceList & maxTeamSpaceNum */
@@ -52,6 +53,7 @@ interface SpaceStoreState {
 
 interface SpaceStoreAction {
   reset: () => void;
+  setRailToken: (railtoken: string | null) => void;
   /** @deprecated  get id from url */
   getSpaceId: () => string;
   getPersonalSpaceID: () => string | undefined;
@@ -76,6 +78,7 @@ interface SpaceStoreAction {
 const DEFAULT_MAXIMUM_SPACE = 3;
 
 export const defaultState: SpaceStoreState = {
+  railtoken: null,
   space: {},
   spaceList: [],
   recentlyUsedSpaceList: [],
@@ -98,6 +101,9 @@ export const useSpaceStore = create<SpaceStoreState & SpaceStoreAction>()(
         ...defaultState,
         reset: () => {
           set(defaultState, false, 'reset');
+        },
+        setRailToken: (newToken: string | null) => {
+          set({ railtoken: newToken }, false, 'setRailToken');
         },
         getSpaceId: () => {
           const { id } = get().space;
@@ -225,6 +231,7 @@ export const useSpaceStore = create<SpaceStoreState & SpaceStoreAction>()(
         name: 'bot-studio-space-storage',
         partialize: state => ({
           spaces: state.spaces,
+          railtoken: state.railtoken,
         }),
       },
     ),

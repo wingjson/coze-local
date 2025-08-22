@@ -10,7 +10,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "IS_OPEN_SOURCE=true rsbuild build",
-    "dev": "IS_OPEN_SOURCE=true CUSTOM_VERSION=release rsbuild dev",
+    "dev": "IS_OPEN_SOURCE=true CUSTOM_VERSION=release rsbuild dev --host 0.0.0.0",
     "lint": "eslint ./ --cache --quiet",
     "preview": "rsbuild preview",
     "test": "vitest --run --passWithNoTests",
@@ -33,6 +33,7 @@
     "@coze-foundation/global": "workspace:*",
     "@coze-foundation/global-adapter": "workspace:*",
     "@coze-foundation/layout": "workspace:*",
+    "@coze-foundation/space-store-adapter": "workspace:*",
     "@coze-foundation/space-ui-adapter": "workspace:*",
     "@coze-foundation/space-ui-base": "workspace:*",
     "@coze-project-ide/main": "workspace:*",
@@ -66,6 +67,7 @@
     "@coze-arch/vitest-config": "workspace:*",
     "@coze-community/explore": "workspace:*",
     "@coze-foundation/foundation-sdk": "workspace:*",
+    "@coze-foundation/space-store-adapter": "workspace:*",
     "@coze-studio/bot-plugin-store": "workspace:*",
     "@rsbuild/core": "~1.1.0",
     "@rsdoctor/rspack-plugin": "1.0.0-rc.0",
@@ -81,4 +83,3 @@
     "webpack": "~5.91.0"
   }
 }
-

@@ -15,9 +15,9 @@
  */
 
 import { redirect } from 'react-router-dom';
-import { getIsLogined } from '@coze-foundation/foundation-sdk';
-import { performLogin } from '@coze-foundation/account-ui-adapter';
-
+import { getLoginStatus } from '@coze-foundation/foundation-sdk';
+import { performSsoLogin } from '@coze-foundation/account-ui-adapter';
+import { useSpaceStore } from '@coze-foundation/space-store-adapter';
 /**
  * 一个可复用的、用于受保护路由的 loader 函数。
  *
@@ -28,26 +28,30 @@ import { performLogin } from '@coze-foundation/account-ui-adapter';
  * 4. 如果已登录或自动登录成功，则允许访问。
  */
 export const protectedRouteLoader = async () => {
-  // 先用一个轻量的方法检查是否已登录
-  if (getIsLogined()) {
-    console.log('[AuthLoader] User is already logged in. Access granted.');
-    return null; // 已登录，直接放行
-  }
+  //  console.log(getLoginStatus(), 152563673783);
+  // // 先用一个轻量的方法检查是否已登录
+  //if (getLoginStatus() == 'logined' || getLoginStatus() == 'setting') {
+  //  console.log('[AuthLoader] User is already logged in. Access granted.');
+  //  return null; // 已登录，直接放行
+  //  }
 
-  // 如果未登录，则调用我们的新函数尝试自动登录
-  console.log('[AuthLoader] User not logged in, attempting auto-login...');
-  const user = await performLogin({
-    email: 'wingjson@gmail.com',
-    password: 'WANGyao0710',
-  });
+  // // 如果未登录，则调用我们的新函数尝试自动登录
+  // console.log(
+  //  '[子应用] 首次获取的 token:11111111111111111111',
+  // useSpaceStore.getState().railtoken,
+  //);
+  //const user = await performSsoLogin({
+  //    ctx: useSpaceStore.getState().railtoken,
+  // });
+  //  console.log('[子应用] performSsoLogin 返回的用户:', user);
 
-  // 如果登录失败，则跳转到登录页
-  if (!user) {
-    console.log('[AuthLoader] Auto-login failed, redirecting to /sign.');
-    return redirect('/sign');
-  }
+  // // 如果登录失败，则跳转到登录页
+  // if (!user) {
+  //   console.log('[AuthLoader] Auto-login failed, redirecting to /sign.');
+  //   return redirect('/sign');
+  // }
 
-  // 登录成功，放行
-  console.log('[AuthLoader] Auto-login successful. Access granted.');
+  // // 登录成功，放行
+  // console.log('[AuthLoader] Auto-login successful. Access granted.');
   return null;
 };
