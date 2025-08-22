@@ -18,44 +18,47 @@ import { passport } from '@coze-studio/api-schema';
 import { setUserInfo, type UserInfo } from '@coze-foundation/account-adapter';
 
 /**
- * 这是一个普通的异步函数，专门用来执行登录操作。
- * 可以在任何地方（包括路由 loader）调用。
- * @param {string} email - 用户邮箱
- * @param {string} password - 用户密码
+ * 这是一个执行 SSO 登录/验证的异步函数。
+ * @param {string} token - 从外部获取的单点登录 Token
  * @returns {Promise<UserInfo | null>} - 成功时返回用户信息，失败时返回 null
  */
-export async function performLogin({
-  email,
-  password,
+export async function performSsoLogin({
+  ctx,
 }: {
-  email: string;
-  password: string;
+  ctx: string;
 }): Promise<UserInfo | null> {
   try {
-    console.log(`[AuthService] 正在尝试使用邮箱 ${email} 登录...`);
+    console.log(
+      '[AuthService] 正在尝试使用 Token 进行 SSO 登录..., token:',
+      ctx,
+    );
 
-    // 1. 直接调用 API 请求
-    const res = (await passport.PassportWebEmailLoginPost({
-      email,
-      password,
-    })) as unknown as { data: UserInfo };
+    // 1. 调用更新后的 SsoCheckLoginPost API
+    //    将 token 放在请求体的 ctx 字段中
+    const res = await passport.SsoCheckLoginPost({
+      ctx: ctx,
+    });
+
+    // 2. 检查响应码是否成功 (通常 0 代表成功)
+    if (res.code !== 0) {
+      throw new Error(`SSO 登录失败: ${res.msg}`);
+    }
 
     const userInfo = res.data;
 
     if (!userInfo) {
-      throw new Error('登录响应中没有用户信息');
+      throw new Error('SSO 登录响应中没有用户信息');
     }
 
-    // 2. 手动调用 setUserInfo 来更新全局状态
-    //    因为我们不再使用 useRequest 的 onSuccess 回调了
+    // 假设 setUserInfo 是一个将用户信息存入 Pinia store 或其他地方的辅助函数
     setUserInfo(userInfo);
 
-    console.log('[AuthService] 登录成功:', userInfo);
+    console.log('[AuthService] SSO 登录成功:', userInfo);
 
     // 3. 成功后返回用户信息
     return userInfo;
   } catch (error) {
-    console.error('[AuthService] 登录失败:', error);
+    console.error('[AuthService] SSO 登录失败:', error);
     // 4. 失败后返回 null
     return null;
   }
