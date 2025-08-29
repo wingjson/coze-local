@@ -114,7 +114,11 @@ export const ProjectFormModal: React.FC<BizProjectFormModalProps> = ({
         }}
         onValueChange={onValuesChange}
       >
-        {selectSpace ? <SpaceFormSelect field={filedKeyMap.space_id} /> : null}
+        {/* {selectSpace ? <SpaceFormSelect field={filedKeyMap.space_id} /> : null} */}
+
+        <div style={{ display: 'none' }}>
+          <SpaceFormSelect field={filedKeyMap.space_id} />
+        </div>
         <ProjectInfoFieldFragment
           showMonetizeConfig={showMonetizeConfig}
           onBeforeUpload={onBeforeUpload}
