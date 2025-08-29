@@ -622,7 +622,6 @@ func getEmbedding(ctx context.Context) (embedding.Embedder, error) {
 	}
 
 	var emb embedding.Embedder
-
 	switch os.Getenv("EMBEDDING_TYPE") {
 	case "openai":
 		var (
