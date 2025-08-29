@@ -16,6 +16,11 @@
 
 /* eslint-disable max-lines */
 import { IconFactory } from './factory';
+/******************************* for rails ************************************/
+export { default as railsIconUrl } from './assets/rails/logo.png';
+import { ReactComponent as RailAvatarIcon } from './assets/rails/avatar-icon.svg';
+export const RailAvatar = IconFactory(<RailAvatarIcon />);
+
 import { ReactComponent as SvtPlaygroundIcon } from './assets/playground-icon.svg';
 import { ReactComponent as SvtPlaygroundIconFill } from './assets/playground-icon-fill.svg';
 import { ReactComponent as SvgMarIcon } from './assets/mar.svg';

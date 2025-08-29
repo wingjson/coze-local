@@ -61,7 +61,7 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
             icon: <IconCozPlusCircle />,
             onClick: createBot,
             dataTestId: 'layout_create-agent-button',
-            className: '!w-[200px] !h-[35px] !bg-[#2585fb]',
+            className: '!w-[200px] !h-[35px] !bg-[#4780ff]',
             label: '创建智能体',
             iconClass: '!text-white flex items-center gap-x-2',
           },
@@ -81,7 +81,7 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
           //   path: '/explore',
           //   dataTestId: 'layout_explore-button',
           // },
-           {
+          {
             icon: <IconCozBot />,
             activeIcon: <IconCozBotFill />,
             title: I18n.t('menu_title_myagent'),
@@ -95,21 +95,20 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
             path: `/space/${personalSpaceID}/library`,
             dataTestId: 'navigation_workspace_library',
           },
-           {
+          {
             title: I18n.t('menu_title_tmpl'),
             icon: <IconCozCompass />,
             activeIcon: <IconCozCompassFill />,
             path: '/explore/template',
             dataTestId: 'layout_explore-button',
           },
-           {
+          {
             title: I18n.t('menu_title_plug'),
             icon: <IconCozCompass />,
             activeIcon: <IconCozCompassFill />,
             path: '/explore/plugin',
             dataTestId: 'layout_explore-button',
           },
-         
         ]}
         // extras={[
         //   {

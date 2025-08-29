@@ -18,7 +18,7 @@ import { type FC } from 'react';
 
 import classNames from 'classnames';
 import { Divider, Space } from '@coze-arch/coze-design';
-import { IconMenuLogo } from '@coze-arch/bot-icons';
+import { railsIconUrl } from '@coze-arch/bot-icons';
 import { useRouteConfig } from '@coze-arch/bot-hooks';
 
 import { type LayoutProps } from '../types';
@@ -61,10 +61,11 @@ export const GlobalLayoutSider: FC<Omit<LayoutProps, 'hasSider'>> = ({
               'border-0 border-r-[1px] border-solid coz-stroke-primary',
           )}
         >
-          <IconMenuLogo
+          {/* <IconMenuLogo
             onClick={onClickLogo}
             className="cursor-pointer w-[40px] h-[40px]"
-          />
+          /> */}
+          <img src={railsIconUrl} className='w-[100px]'/>
           <div className="mt-[16px]">
             {actions?.map((action, index) => (
               <GlobalLayoutActionBtn {...action} key={index} />
