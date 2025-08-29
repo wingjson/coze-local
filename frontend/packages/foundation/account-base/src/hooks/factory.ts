@@ -56,7 +56,8 @@ export const useCheckLoginBase = (
     const isLogined = !!useUserStore.getState().userInfo?.user_id_str;
     // The current page requires login. If the login check result is not logged in, redirect back to the login page.
     if (needLogin && isSettled && !isLogined) {
-      memoizedGoLogin();
+      // memoizedGoLogin();
+      window.location.href = 'http://172.25.1.180:5173';
     }
   }, [needLogin, isSettled]);
 
@@ -67,7 +68,7 @@ export const useCheckLoginBase = (
       if (needLogin) {
         if (!fired) {
           fired = true;
-          memoizedGoLogin();
+          window.location.href = 'http://172.25.1.180:5173';
         }
       }
     };

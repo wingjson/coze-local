@@ -36,7 +36,15 @@ export enum ErrorCodes {
   COZE_TOKEN_INSUFFICIENT_WORKFLOW = 702095072,
 }
 
-export const axiosInstance = axios.create();
+// export const axiosInstance = axios.create();
+export const axiosInstance = axios.create({
+  // ✨ 1. 在这里设置您的后端API基础地址
+  //    这样，其他地方调用接口时就不用写完整路径了
+  // baseURL: 'http://172.27.115.35:8888', // 您的Go后端地址
+
+  // ✨ 2. 在这里全局开启携带Cookie的选项
+  withCredentials: true,
+});
 
 const HTTP_STATUS_COE_UNAUTHORIZED = 401;
 

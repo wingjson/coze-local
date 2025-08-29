@@ -83,8 +83,8 @@ export const DataTable = ({
               empty={{
                 title: I18n.t('no_api_token_1'),
                 description: I18n.t('add_api_token_1'),
-                btnText: I18n.t('add_new_token_button_1'),
-                btnOnClick: onAddClick,
+                // btnText: I18n.t('add_new_token_button_1'),
+                // btnOnClick: onAddClick,
               }}
             />
           )

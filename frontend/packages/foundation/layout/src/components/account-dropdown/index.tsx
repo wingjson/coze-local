@@ -24,7 +24,7 @@ import {
 import classNames from 'classnames';
 import { Avatar, Badge, Dropdown } from '@coze-arch/coze-design';
 import { useUserInfo } from '@coze-foundation/account-adapter';
-
+import { RailAvatar } from '@coze-arch/bot-icons';
 import { reportNavClick } from '../global-layout/utils';
 import { type LayoutAccountMenuItem } from '../global-layout/types';
 
@@ -135,10 +135,12 @@ export const GlobalLayoutAccountDropdown: FC<
             }}
             count={userBadge}
           >
-            <Avatar
+            {/* <Avatar
               src={userInfo.avatar_url}
               className={classNames('w-[32px] h-[32px] rounded-full')}
-            />
+            /> */}
+            <RailAvatar className="cursor-pointer w-[30px] h-[30px]"/>
+            {/* <RailAvatar /> */}
           </Badge>
           {userInfo.user_unique_name}
           {userTips}
