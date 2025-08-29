@@ -32,14 +32,9 @@ export async function performSsoLogin({
       '[AuthService] 正在尝试使用 Token 进行 SSO 登录..., token:',
       ctx,
     );
-
-    // 1. 调用更新后的 SsoCheckLoginPost API
-    //    将 token 放在请求体的 ctx 字段中
     const res = await passport.SsoCheckLoginPost({
       ctx: ctx,
     });
-
-    // 2. 检查响应码是否成功 (通常 0 代表成功)
     if (res.code !== 0) {
       throw new Error(`SSO 登录失败: ${res.msg}`);
     }
@@ -50,16 +45,13 @@ export async function performSsoLogin({
       throw new Error('SSO 登录响应中没有用户信息');
     }
 
-    // 假设 setUserInfo 是一个将用户信息存入 Pinia store 或其他地方的辅助函数
     setUserInfo(userInfo);
-
+    localStorage.setItem('loginStatus', 'logined');
     console.log('[AuthService] SSO 登录成功:', userInfo);
 
-    // 3. 成功后返回用户信息
     return userInfo;
   } catch (error) {
     console.error('[AuthService] SSO 登录失败:', error);
-    // 4. 失败后返回 null
     return null;
   }
 }

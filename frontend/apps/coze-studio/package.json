@@ -1,5 +1,5 @@
 {
-  "name": "@coze-studio/app",
+  "name": "铁科智问",
   "version": "0.0.1",
   "private": true,
   "description": "coze studio app",
@@ -83,3 +83,4 @@
     "webpack": "~5.91.0"
   }
 }
+
