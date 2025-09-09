@@ -239,6 +239,7 @@ function useUrlParams<T>(
     }${hash}`;
 
     if (replaceUrl) {
+      console.log(document.title, 222222222222223333333333333334444444444444);
       window.history.replaceState(
         { ...window.history.state, url, title: document.title },
         document.title,
