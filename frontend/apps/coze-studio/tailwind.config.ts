@@ -23,7 +23,7 @@ import json from '@coze-arch/semi-theme-hand01/raw.json';
 import { SCREENS_TOKENS } from '@coze-arch/responsive-kit/constant';
 
 const contents = getTailwindContents('@coze-studio/app');
-console.log(`Got ${contents.length} contents for tailwind`);
+// console.log(`Got ${contents.length} contents for tailwind`);
 
 export default {
   content: contents,
