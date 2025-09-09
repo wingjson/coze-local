@@ -168,9 +168,7 @@ export function PublishTitleBar() {
       className="sticky top-0 z-[100] coz-bg-primary overflow-y-hidden"
       style={{ height: publishHeaderHeight }}
     >
-      <Helmet>
-        <title>{I18n.t('Publish')}</title>
-      </Helmet>
+      <Helmet>{/* <title>{I18n.t('Publish')}</title> */}</Helmet>
       <div className="flex p-[16px] justify-between items-center  coz-stroke-primary border-b	border-x-0 border-t-0 border-solid pl-2">
         <div className="flex items-center">
           <IconButton
