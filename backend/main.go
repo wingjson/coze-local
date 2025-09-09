@@ -85,16 +85,17 @@ func startHttpServer() {
 
 	// cors option
 	config := cors.DefaultConfig()
-	// config.AllowAllOrigins = true
-	// config.AllowHeaders = []string{"*"}
-	config.AllowOrigins = []string{"http://172.25.1.180:5173"}
+	config.AllowAllOrigins = true
+	config.AllowHeaders = []string{"*"}
+// 	config.AllowOrigins = []string{"http://172.25.1.180:5173"}
 
-// 关键：必须允许携带凭证
-config.AllowCredentials = true
+// // 关键：必须允许携带凭证
+// config.AllowCredentials = true
 
-// 关键：确保允许必要的头部和方法
-config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization", "X-Requested-With", "Accept"}
-config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
+// // 关键：确保允许必要的头部和方法
+// // config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization", "X-Requested-With", "Accept"}
+// config.AllowHeaders = []string{"*"}
+// config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 
 	corsHandler := cors.New(config)
 

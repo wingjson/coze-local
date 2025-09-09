@@ -51,14 +51,14 @@ export const AccountDropdown = () => {
           },
           dataTestId: 'layout_avatar_api-auth',
         },
-        {
-          prefixIcon: <IconCozSetting />,
-          title: I18n.t('navi_bar_account_settings'),
-          onClick: () => {
-            openAccountSettings('account');
-          },
-          dataTestId: 'layout_avatar_profile-settings',
-        },
+        // {
+        //   prefixIcon: <IconCozSetting />,
+        //   title: I18n.t('navi_bar_account_settings'),
+        //   onClick: () => {
+        //     openAccountSettings('account');
+        //   },
+        //   dataTestId: 'layout_avatar_profile-settings',
+        // },
         // <Dropdown.Divider />,
         // {
         //   prefixIcon: <IconCozExit />,

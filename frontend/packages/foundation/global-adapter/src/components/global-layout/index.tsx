@@ -41,7 +41,7 @@ export const GlobalLayout: FC = () => {
   // For historical reasons, en-US needs to be converted to en.
   const transformedCurrentLocale =
     currentLocale === 'en-US' ? 'en' : currentLocale;
-
+  console.log(document.title, 836128736712637816238712);
   useEffect(() => {
     if (userInfo && I18n.language !== transformedCurrentLocale) {
       localStorage.setItem('i18next', transformedCurrentLocale);

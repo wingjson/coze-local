@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2025 coze-dev Authors
  *
@@ -5,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +21,7 @@ import { dynamicImportMdBoxStyle } from '@coze-arch/bot-md-box-adapter/style';
 import { pullFeatureFlags, type FEATURE_FLAGS } from '@coze-arch/bot-flags';
 import { useSpaceStore } from '@coze-foundation/space-store-adapter';
 import { performSsoLogin } from '@coze-foundation/account-ui-adapter';
-import { getLoginStatus,logoutOnly} from '@coze-foundation/foundation-sdk';
+import { getLoginStatus, logoutOnly } from '@coze-foundation/foundation-sdk';
 
 import { App } from './app';
 import './global.less';
@@ -33,58 +34,30 @@ const initFlags = () => {
   });
 };
 
-const checkSSOstatus = () =>{
-  // ✨ 关键步骤 2：优先从 localStorage 同步读取状态
-  const persistedStatus = localStorage.getItem('loginStatus');
-  // console.log(persistedStatus)
-  if (persistedStatus === 'logined') {
-    return 'logined'; // 如果硬盘上有记录，直接返回"已登录"，无需再看内存
-  }
-  return getLoginStatus(); 
-}
+
+const getTokenFromUrl = (): string | null => {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('authToken');
+};
 
 const main = async () => {
-  
-   if (!window.__POWERED_BY_WUJIE__) {
-    console.warn("Direct access detected. Redirecting to the main application...");
-    
-    // Redirect the user to the main app's URL
-    window.location.href = 'http://172.25.1.180:5173'; // <-- Replace with your main app's actual URL
-    
-    // Stop any further execution of this script
-    return; 
+  // --- Start: New code to listen for messages from the parent app ---
+  const authToken = getTokenFromUrl();
+
+  if (authToken) {
+    useSpaceStore.getState().setRailToken(authToken);
+    await performSsoLogin({ ctx: authToken });
   }
-  if (window.__POWERED_BY_WUJIE__) {
-    // Get token from props passed by the main application
-    const authToken = window.$wujie?.props?.authToken;
-
-    if (authToken) {
-      // console.log("Sub-app received authToken from Wujie:", authToken);
-      // Store the token so the rest of the app can use it
-      // This is a simple and effective way for other parts of your app to find the token
-      const currentToken = authToken;
-      useSpaceStore.getState().setRailToken(currentToken);
-      if (checkSSOstatus() != 'logined') {
-      await performSsoLogin({ctx: currentToken,});
-
-      // console.log('[子应用] performSsoLogin 返回的用户:', user);
-    }
-      // localStorage.setItem("subapp-auth-token", authToken);
-    } else {
-      // console.warn("Running in Wujie, but no authToken was provided in props.");
-    }
-    window.$wujie?.bus.$on("main-app-logout", () => {
-      // console.log("子应用接收到 main-app-logout 事件，执行登出...");
-      logoutOnly()
-      // Call your sub-app's logout logic here
-      // For example:
+  const handleParentMessage = (event: MessageEvent) => {
+    const { data } = event;
+    if (data && data.type === 'main-app-logout') {
+      logoutOnly();
       localStorage.removeItem('loginStatus');
-    });
+    }
+  };
+  window.addEventListener('message', handleParentMessage);
 
-  }
-  // Initialize the value of the function switch
   initFlags();
-  // Initialize i18n
   initI18nInstance({
     lng: (localStorage.getItem('i18next') ?? (IS_OVERSEA ? 'en' : 'zh-CN')) as
       | 'en'
@@ -98,8 +71,6 @@ const main = async () => {
     throw new Error('root element not found');
   }
   const root = createRoot($root);
-
-
 
   root.render(<App />);
 };

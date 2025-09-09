@@ -16,14 +16,14 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
         - name: X-Requested-With
           value: XMLHttpRequest
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 20001
       deprecated: false
@@ -46,17 +46,17 @@
       key: Authorization
       sub_type: token/api_key
       # service token apply to https://open.bochaai.com/
-      payload: '{"key": "Authorization", "service_token": "", "location": "Header"}'
+      payload: '{"key": "Authorization", "service_token": "Bearer sk-04901308b32d47a1acfe0e545f7dd8b4", "location": "Header"}'
     logo_url: official_plugin_icon/plugin_bocha_search.jpeg
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 30001
       deprecated: false
@@ -84,10 +84,10 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
-      header: [ ]
-      path: [ ]
-      query: [ ]
+      body: []
+      header: []
+      path: []
+      query: []
   tools:
     - tool_id: 40001
       deprecated: false
@@ -115,12 +115,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 50001
       deprecated: false
@@ -144,12 +144,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 60001
       deprecated: false
@@ -175,7 +175,7 @@
     logo_url: official_plugin_icon/plugin_image_compression.jpeg
     api:
       type: openapi
-    common_params: { }
+    common_params: {}
   tools:
     - tool_id: 90001
       deprecated: false
@@ -203,12 +203,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 100001
       deprecated: false
@@ -232,12 +232,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 110001
       deprecated: false
@@ -265,12 +265,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 120001
       deprecated: false
@@ -310,12 +310,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 140001
       deprecated: false
@@ -360,12 +360,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 150001
       deprecated: false
@@ -442,9 +442,9 @@
     api:
       type: openapi
     common_params:
-      path: [ ]
-      query: [ ]
-      body: [ ]
+      path: []
+      query: []
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
@@ -554,12 +554,12 @@
     api:
       type: openapi
     common_params:
-      body: [ ]
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
+      path: []
+      query: []
   tools:
     - tool_id: 170001
       deprecated: false
@@ -642,12 +642,12 @@
     api:
       type: openapi
     common_params:
-      query: [ ]
-      body: [ ]
+      query: []
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
+      path: []
   tools:
     - tool_id: 180001
       deprecated: false
@@ -719,9 +719,9 @@
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
-      body: [ ]
+      path: []
+      query: []
+      body: []
   tools:
     - tool_id: 190001
       deprecated: false
@@ -783,9 +783,9 @@
       header:
         - name: User-Agent
           value: Coze/1.0
-      path: [ ]
-      query: [ ]
-      body: [ ]
+      path: []
+      query: []
+      body: []
   tools:
     - tool_id: 200001
       deprecated: false
@@ -812,9 +812,9 @@
     api:
       type: openapi
     common_params:
-      path: [ ]
-      query: [ ]
-      body: [ ]
+      path: []
+      query: []
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
@@ -858,9 +858,9 @@
     api:
       type: openapi
     common_params:
-      path: [ ]
-      query: [ ]
-      body: [ ]
+      path: []
+      query: []
+      body: []
       header:
         - name: User-Agent
           value: Coze/1.0
@@ -868,7 +868,7 @@
       type: service_http
       key: Authorization
       sub_type: token/api_key
-      payload: '{"key": "key", "service_token": "", "location": "Query"}'  # apply token on the Gaode Open Platform(https://lbs.amap.com/api).
+      payload: '{"key": "key", "service_token": "", "location": "Query"}' # apply token on the Gaode Open Platform(https://lbs.amap.com/api).
   tools:
     - tool_id: 220001
       deprecated: false
@@ -906,3 +906,50 @@
       deprecated: false
       method: get
       sub_url: /v5/place/around
+- plugin_id: 23
+  product_id: 7379953949534715957
+  deprecated: false
+  version: v1.0.0
+  openapi_doc_file: file_process.yaml
+  plugin_type: 1
+  manifest:
+    schema_version: 'v1'
+    name_for_model: 'fileread'
+    name_for_human: '文档读取'
+    description_for_model: '根据传入的url读取文档内容/html转word'
+    description_for_human: '根据传入的url读取文档内容/html转word'
+    logo_url: 'default_icon/plugin_default_icon.png'
+    api:
+      type: 'openapi'
+    common_params:
+      path: []
+      body: []
+      query: []
+      header:
+        - name: User-Agent
+          value: Coze/1.0
+    auth:
+      type: 'none'
+      sub_type: ''
+      payload: ''
+  tools:
+    - tool_id: 230001
+      deprecated: false
+      method: get
+      sub_url: /plug/process-file
+    - tool_id: 230002
+      deprecated: false
+      method: post
+      sub_url: /plug/export-to-word
+    - tool_id: 230003
+      deprecated: false
+      method: post
+      sub_url: /plug/generate-charts
+    - tool_id: 230004
+      deprecated: false
+      method: post
+      sub_url: /plug/md-to-word
+    - tool_id: 230005
+      deprecated: false
+      method: post
+      sub_url: /plug/process-excel

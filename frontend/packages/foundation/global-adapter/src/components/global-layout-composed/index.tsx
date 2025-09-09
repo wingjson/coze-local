@@ -82,6 +82,13 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
           //   dataTestId: 'layout_explore-button',
           // },
           {
+            title: I18n.t('menu_title_tmpl'),
+            icon: <IconCozCompass />,
+            activeIcon: <IconCozCompassFill />,
+            path: '/explore/template',
+            dataTestId: 'layout_explore-button',
+          },
+          {
             icon: <IconCozBot />,
             activeIcon: <IconCozBotFill />,
             title: I18n.t('menu_title_myagent'),
@@ -94,13 +101,6 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
             title: I18n.t('menu_title_knowledge'),
             path: `/space/${personalSpaceID}/library`,
             dataTestId: 'navigation_workspace_library',
-          },
-          {
-            title: I18n.t('menu_title_tmpl'),
-            icon: <IconCozCompass />,
-            activeIcon: <IconCozCompassFill />,
-            path: '/explore/template',
-            dataTestId: 'layout_explore-button',
           },
           {
             title: I18n.t('menu_title_plug'),

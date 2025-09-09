@@ -26,7 +26,7 @@ import {
 import { checkLoginBase } from '../utils/factory';
 import { type UserInfo } from '../types';
 import { useUserStore } from '../store/user';
-
+import { Modal } from '@coze-arch/coze-design';
 /**
  * It is used to check the login status when the page is initialized, and listen for the interface error if the login status is invalid.
  * When the login status fails, it will be redirected to the login page
@@ -54,10 +54,22 @@ export const useCheckLoginBase = (
 
   useEffect(() => {
     const isLogined = !!useUserStore.getState().userInfo?.user_id_str;
+    // console.log(isLogined, 22222222222222222222222222222222);
     // The current page requires login. If the login check result is not logged in, redirect back to the login page.
     if (needLogin && isSettled && !isLogined) {
       // memoizedGoLogin();
-      window.location.href = 'http://172.25.1.180:5173';
+      // window.location.href = 'http://172.25.1.180:5173';
+      Modal.confirm({
+        title: '当前账号登录已过期，请重新登录',
+        okText: '重新登录',
+        closeOnEsc: false,
+        maskClosable: false,
+        onOk: () => {
+          // window.location.reload();
+          window.location.href = 'http://172.25.1.180:5173';
+          // console.log(1212);
+        },
+      });
     }
   }, [needLogin, isSettled]);
 
@@ -68,7 +80,17 @@ export const useCheckLoginBase = (
       if (needLogin) {
         if (!fired) {
           fired = true;
-          window.location.href = 'http://172.25.1.180:5173';
+          Modal.confirm({
+            title: '当前账号登录已过期，请重新登录',
+            okText: '重新登录',
+            closeOnEsc: false,
+            maskClosable: false,
+            onOk: () => {
+              window.location.href = 'http://172.25.1.180:5173';
+            },
+          });
+          // memoizedGoLogin();
+          //
         }
       }
     };

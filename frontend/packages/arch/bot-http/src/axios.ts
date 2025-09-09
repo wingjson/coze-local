@@ -131,6 +131,12 @@ axiosInstance.interceptors.response.use(
 );
 
 axiosInstance.interceptors.request.use(config => {
+  logger.info({
+    namespace: 'api',
+    scope: 'response',
+    message: '----',
+    meta: { config },
+  });
   const setHeader = (key: string, value: string) => {
     if (typeof config.headers.set === 'function') {
       config.headers.set(key, value);
@@ -144,6 +150,11 @@ axiosInstance.interceptors.request.use(config => {
     }
     return config.headers[key];
   };
+  console.log(
+    `[axiosInstance Request] - 走我们自定义的实例了:`,
+    config.method?.toUpperCase(),
+    config.url,
+  );
   setHeader('x-requested-with', 'XMLHttpRequest');
   if (
     ['post', 'get'].includes(config.method?.toLowerCase() ?? '') &&

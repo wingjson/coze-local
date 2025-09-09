@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@coze-arch/bot-api": "workspace:*",
+    "@coze-arch/coze-design": "0.0.6-alpha.346d77",
     "@coze-arch/i18n": "workspace:*",
     "@coze-arch/logger": "workspace:*",
     "@coze-foundation/local-storage": "workspace:*",
@@ -45,4 +46,3 @@
     "react": ">=18.2.0"
   }
 }
-
