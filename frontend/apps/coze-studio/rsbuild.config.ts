@@ -27,15 +27,15 @@ const mergedConfig = defineConfig({
   server: {
     strictPort: true,
     port: 5174,
-    cors: {
-      // 配置 `Access-Control-Allow-Origin` CORS 响应头
-      origin: 'http://172.25.1.180:5173',
-    },
-    headers: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
-      'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
-    },
+    // cors: {
+    //   // 配置 `Access-Control-Allow-Origin` CORS 响应头
+    //   origin: 'http://172.25.1.180:5173',
+    // },
+    // headers: {
+    //   'Access-Control-Allow-Credentials': true,
+    //   'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
+    //   'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
+    // },
     proxy: [
       {
         context: ['/api'],
@@ -52,7 +52,7 @@ const mergedConfig = defineConfig({
     ],
   },
   html: {
-    title: '扣子 Studio',
+    title: '铁科智问',
     favicon: './assets/favicon.png',
     template: './index.html',
     crossorigin: 'anonymous',

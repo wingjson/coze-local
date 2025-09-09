@@ -117,7 +117,7 @@ export const mockLLMModels = {
         model_series: {
           series_name: '热门模型',
           icon_url: 'doubao_v2.png',
-          model_vendor: '扣子',
+          model_vendor: '扣子1',
         },
         model_status_details: {
           is_new_model: false,

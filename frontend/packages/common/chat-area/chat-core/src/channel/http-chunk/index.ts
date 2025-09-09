@@ -202,7 +202,7 @@ export class HttpChunk extends CustomEventEmitter {
       body: channelFetchInfo.body,
       headers: channelFetchInfo.headers,
       method: channelFetchInfo.method,
-
+      credentials: 'include',
       signal: fetchDataHelper.abortSignal.signal,
       totalFetchTimeout: fetchDataHelper.totalFetchTimeout,
       onTotalFetchTimeout: dataClump =>

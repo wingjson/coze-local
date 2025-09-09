@@ -40,6 +40,7 @@ export const UILayout: React.FC<
 } = ({ className, children, title }) => {
   const { i18n } = useContext<I18nContext>(i18nContext);
   const _title = title || i18n.t('platform_name');
+  console.log(_title,_title,2222222222222222222233213123123)
   return (
     <div className={classNames(s['ui-layout'], className)}>
       <Helmet>

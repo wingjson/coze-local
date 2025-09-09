@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import { useLayoutEffect } from 'react';
 import { GlobalLayout, useAppInit } from '@coze-foundation/global-adapter';
 
 export const Layout = () => {
   useAppInit();
-
   return <GlobalLayout />;
 };

@@ -1,0 +1,175 @@
+openapi: 3.0.1
+info:
+  title: 文档与图表统一服务
+  description: 一个统一的后端服务，提供文档内容读取、图表生成和文件格式转换功能。
+  version: v1
+
+servers:
+  - url: http://192.168.107.16:5000
+    description: 本地开发服务器
+
+paths:
+  /plug/process-file:
+    get:
+      summary: 从URL读取文档内容
+      description: 根据传入的URL，下载并提取 PDF, DOCX, TXT 文件的文本内容，支持OCR。
+      operationId: processFileFromUrl
+      parameters:
+        - name: url
+          in: query
+          description: 待处理文件的公开URL地址。
+          required: true
+          schema:
+            type: string
+            example: 'https://bucketzhujf.oss-cn-guangzhou.aliyuncs.com/7708abfc375dbf038d5b9fd26a56c37c.docx'
+      responses:
+        '200':
+          description: 成功提取文件内容。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  character_count:
+                    type: integer
+                    example: 1532
+                  content:
+                    type: string
+                    example: '这是提取出的文档内容...'
+
+  /plug/generate-charts:
+    post:
+      summary: 根据JSON数据生成图表
+      description: 接收一个包含图表描述的JSON对象，生成相应的图表（条形图、折线图、饼图），并返回图表的下载链接。
+      operationId: generateCharts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - img_data
+              properties:
+                img_data:
+                  type: string
+                  description: 包含一个或多个图表定义的对象。键是图表标题，值是图表数据。
+                  example: "# 这是一个标题\n\n这是一个段落。"
+      responses:
+        '200':
+          description: 成功生成图表。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: string
+                    description: 包含每个图表标题及其对应下载URL的字典。
+                    example: "# 这是一个标题\n\n这是一个段落。"
+
+  /plug/md-to-word:
+    post:
+      summary: Markdown转换为Word文档
+      description: 接收一段Markdown格式的文本，使用Pandoc将其转换为.docx格式的Word文档，并返回下载链接。
+      operationId: exportMdToWord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - markdown_content
+              properties:
+                markdown_content:
+                  type: string
+                  description: Markdown格式的源文本。
+                  example: "# 这是一个标题\n\n这是一个段落。"
+      responses:
+        '200':
+          description: 成功转换文档。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  url:
+                    type: string
+                    example: 'http://192.168.107.16:5000/api/downloads/docs/some-uuid.docx'
+
+  /plug/export-to-word:
+    post:
+      summary: HTML转换为Word文档
+      description: 接收一段HTML代码，使用Pandoc将其转换为.docx格式的Word文档，并返回下载链接。
+      operationId: exportHtmlToWord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - html
+              properties:
+                html:
+                  type: string
+                  description: HTML格式的源代码。
+                  example: '<h1>这是一个标题</h1><p>这是一个段落。</p>'
+      responses:
+        '200':
+          description: 成功转换文档。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  url:
+                    type: string
+                    example: 'http://192.168.107.16:5000/api/downloads/docs/some-uuid.docx'
+
+  /plug/process-excel:
+    post:
+      summary: 读取excel
+      description: 接收一段HTML代码，使用Pandoc将其转换为.docx格式的Word文档，并返回下载链接。
+      operationId: readExcel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  type: string
+                  description: url
+                  example: '<h1>这是一个标题</h1><p>这是一个段落。</p>'
+      responses:
+        '200':
+          description: 成功转换文档。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: string
+                    description: data
+                    example: '<h1>这是一个标题</h1><p>这是一个段落。</p>'

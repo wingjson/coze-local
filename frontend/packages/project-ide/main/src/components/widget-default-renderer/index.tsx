@@ -96,14 +96,14 @@ export const WidgetDefaultRenderer = () => {
           <div className={styles['gallery-description']}>
             {I18n.t('project_ide_welcome_workflow_describe')}
           </div>
-          <Button
+          {/* <Button
             className={styles['doc-search']}
             icon={<IconCozDocument />}
             color="primary"
             onClick={handleWorkflowDoc}
           >
             {I18n.t('project_ide_view_document')}
-          </Button>
+          </Button> */}
         </div>
         {IS_OVERSEA || IS_OPEN_SOURCE ? null : (
           <div className={styles['gallery-block']}>
@@ -119,14 +119,14 @@ export const WidgetDefaultRenderer = () => {
             <div className={styles['gallery-description']}>
               {I18n.t('project_ide_welcome_ui_builder_describe')}
             </div>
-            <Button
+            {/* <Button
               className={styles['doc-search']}
               icon={<IconCozDocument />}
               color="primary"
               onClick={handleUIBuilderDoc}
             >
               {I18n.t('project_ide_view_document')}
-            </Button>
+            </Button> */}
           </div>
         )}
         <div className={styles['gallery-block']}>
@@ -142,14 +142,14 @@ export const WidgetDefaultRenderer = () => {
           <div className={styles['gallery-description']}>
             {I18n.t('project_ide_welcome_db_describ')}
           </div>
-          <Button
+          {/* <Button
             className={styles['doc-search']}
             icon={<IconCozDocument />}
             color="primary"
             onClick={handleDatabaseDoc}
           >
             {I18n.t('project_ide_view_document')}
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className={styles['shortcuts-list']}>

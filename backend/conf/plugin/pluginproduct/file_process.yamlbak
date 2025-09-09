@@ -1,0 +1,68 @@
+info:
+  title: 文档读取
+  description: 根据传入的url读取文档内容
+  version: v1
+openapi: 3.0.1
+paths:
+  /export-to-word:
+    post:
+      summary: html转换为word
+      operationId: html2word
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - html
+              properties:
+                html:
+                  type: string
+                  description: html
+                  default: ''
+      responses:
+        '200':
+          description: description is required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  url:
+                    type: string
+  /process-file:
+    get:
+      summary: 读取文档内容
+      operationId: fileread
+      parameters:
+        - name: url
+          in: query
+          description: 文件url
+          required: true
+          schema:
+            type: string
+            default: https://bucketzhujf.oss-cn-guangzhou.aliyuncs.com/7708abfc375dbf038d5b9fd26a56c37c.docx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: description is required
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  character_count:
+                    type: integer
+                  content:
+                    type: string
+                  status:
+                    type: string
+
+servers:
+  - url: http://192.168.107.16:5000

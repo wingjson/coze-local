@@ -23,11 +23,11 @@ import { I18n } from '@coze-arch/i18n';
 
 export const useAccountSettings = () => {
   const tabs = [
-    {
-      id: 'account',
-      tabName: I18n.t('menu_profile_account'),
-      content: () => <UserInfoPanel />,
-    },
+    // {
+    //   id: 'account',
+    //   tabName: I18n.t('menu_profile_account'),
+    //   content: () => <UserInfoPanel />,
+    // },
     {
       id: 'api-auth',
       tabName: I18n.t('settings_api_authorization'),

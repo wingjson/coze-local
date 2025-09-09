@@ -23,7 +23,7 @@ import {
   Typography,
   Tooltip,
 } from '@coze-arch/coze-design';
-
+import { RailAvatar } from '@coze-arch/bot-icons';
 const ellipsis = {
   showTooltip: true,
 };
@@ -58,7 +58,7 @@ export const UserInfoMenu = () => {
                     trigger={userLabel?.label_name ? 'hover' : 'custom'}
                   >
                     <div className="bg-white rounded-full w-[16px] h-[16px] flex items-center justify-center">
-                      <CozAvatar
+                      {/* <CozAvatar
                         src={userLabel?.icon_url}
                         className="w-[12px] h-[12px] rounded-full"
                         type="person"
@@ -69,18 +69,15 @@ export const UserInfoMenu = () => {
                             window.open(userLabel?.jump_link, '_blank');
                           }
                         }}
-                      />
+                      /> */}
+                      <RailAvatar className="cursor-pointer w-[30px] h-[30px]" />
                     </div>
                   </Tooltip>
                 ) : null
               }
               className="shrink-0"
             >
-              <CozAvatar
-                src={userInfo.avatar_url}
-                className="w-[32px] h-[32px] rounded-full"
-                type="person"
-              />
+              <RailAvatar className="cursor-pointer w-[32px] h-[32px]" />
             </Badge>
           }
           {
@@ -92,8 +89,8 @@ export const UserInfoMenu = () => {
                 {userInfo.name}
               </Typography.Text>
               <Typography.Text className="coz-fg-secondary" ellipsis={ellipsis}>
-                {userUniqueName ? '@' : ''}
-                {userUniqueName}
+                {/* {userUniqueName ? '@' : ''} */}
+                {/* {userUniqueName} */}
               </Typography.Text>
             </div>
           }
