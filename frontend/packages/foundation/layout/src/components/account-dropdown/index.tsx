@@ -63,7 +63,7 @@ export const GlobalLayoutAccountDropdown: FC<
   onVisibleChange,
 }) => {
   const userInfo = useUserInfo();
-  console.log(userInfo);
+  // console.log(userInfo);
   if (!userInfo) {
     return null;
   }
@@ -139,10 +139,12 @@ export const GlobalLayoutAccountDropdown: FC<
               src={userInfo.avatar_url}
               className={classNames('w-[32px] h-[32px] rounded-full')}
             /> */}
-            <RailAvatar className="cursor-pointer w-[30px] h-[30px]"/>
+            <RailAvatar className="cursor-pointer w-[30px] h-[30px]" />
             {/* <RailAvatar /> */}
           </Badge>
-          {userInfo.user_unique_name}
+          {/* {userInfo.user_unique_name}
+           */}
+          <span className="cursor-pointer">{userInfo.user_unique_name}</span>
           {userTips}
         </div>
       </Dropdown>
