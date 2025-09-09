@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-import { type FC, useState } from 'react';
-
+import { type FC, useState} from 'react';
+import { useNavigate} from 'react-router-dom';
 import cls from 'classnames';
 import { explore } from '@coze-studio/api-schema';
-import { useSpaceList } from '@coze-foundation/space-store';
+import { useSpaceList,useSpaceStore} from '@coze-foundation/space-store';
 import { I18n } from '@coze-arch/i18n';
 import { Image, Input, Modal, Space, Toast } from '@coze-arch/coze-design';
 import { type ProductEntityType } from '@coze-arch/bot-api/product_api';
-
 import { type CardInfoProps } from '../type';
 import { CardTag } from '../components/tag';
 import { CardInfo } from '../components/info';
@@ -31,7 +30,9 @@ import { CardButton } from '../components/button';
 
 type ProductInfo = explore.ProductInfo;
 import styles from './index.module.less';
-
+// 
+const personalSpaceID = useSpaceStore.getState().getPersonalSpaceID();
+console.log(personalSpaceID)
 export type TemplateCardProps = ProductInfo;
 
 export const TemplateCard: FC<TemplateCardProps> = props => {
@@ -79,6 +80,7 @@ const DuplicateModal: FC<{
   entityType: explore.product_common.ProductEntityType;
   hide: () => void;
 }> = ({ defaultTitle, hide, productId, entityType }) => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState(defaultTitle);
   const { spaces } = useSpaceList();
   const spaceId = spaces?.[0]?.id;
@@ -97,6 +99,7 @@ const DuplicateModal: FC<{
           });
           Toast.success(I18n.t('copy_success'));
           hide();
+          navigate(`/space/${personalSpaceID}/develop`, { replace: true });
         } catch (err) {
           console.error('PublicDuplicateProduct', err);
           Toast.error(I18n.t('copy_failed'));

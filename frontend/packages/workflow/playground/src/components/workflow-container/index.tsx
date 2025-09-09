@@ -279,11 +279,11 @@ const WorkflowContainer = forwardRef<
     <>
       {!workflowState.projectId && (
         <Helmet>
-          <title>
+          {/* <title>
             {I18n.t('workflow_tab_title', {
               name: workflowState.info?.name,
             })}
-          </title>
+          </title> */}
         </Helmet>
       )}
 
