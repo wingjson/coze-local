@@ -57,19 +57,18 @@ export const useCheckLoginBase = (
     // console.log(isLogined, 22222222222222222222222222222222);
     // The current page requires login. If the login check result is not logged in, redirect back to the login page.
     if (needLogin && isSettled && !isLogined) {
-      // memoizedGoLogin();
-      // window.location.href = 'http://172.25.1.180:5173';
-      Modal.confirm({
-        title: '当前账号登录已过期，请重新登录',
-        okText: '重新登录',
-        closeOnEsc: false,
-        maskClosable: false,
-        onOk: () => {
-          // window.location.reload();
-          window.location.href = 'http://172.25.1.180:5173';
-          // console.log(1212);
-        },
-      });
+      memoizedGoLogin();
+      // Modal.confirm({
+      //   title: '当前账号登录已过期，请重新登录',
+      //   okText: '重新登录',
+      //   closeOnEsc: false,
+      //   maskClosable: false,
+      //   onOk: () => {
+      //     // window.location.reload();
+      //     window.location.href = 'http://172.25.1.180:5173';
+      //     // console.log(1212);
+      //   },
+      // });
     }
   }, [needLogin, isSettled]);
 
@@ -80,16 +79,16 @@ export const useCheckLoginBase = (
       if (needLogin) {
         if (!fired) {
           fired = true;
-          Modal.confirm({
-            title: '当前账号登录已过期，请重新登录',
-            okText: '重新登录',
-            closeOnEsc: false,
-            maskClosable: false,
-            onOk: () => {
-              window.location.href = 'http://172.25.1.180:5173';
-            },
-          });
-          // memoizedGoLogin();
+          // Modal.confirm({
+          //   title: '当前账号登录已过期，请重新登录',
+          //   okText: '重新登录',
+          //   closeOnEsc: false,
+          //   maskClosable: false,
+          //   onOk: () => {
+          //     window.location.href = 'http://172.25.1.180:5173';
+          //   },
+          // });
+          memoizedGoLogin();
           //
         }
       }
