@@ -539,6 +539,7 @@
   "bot_opening_remarks_replace_confirm_button": "替换",
   "bot_persona_and_prompt": "人设与回复逻辑",
   "bot_preview_attach_0319": "上传文件：image、pdf、docx、excel、csv、audio。请 {placeholder} 处理文件。",
+  "bot_preview_attach_0911": "上传文件：image、pdf、docx、excel、csv。",
   "bot_preview_attach_select": "选择工具",
   "bot_preview_debug_title": "预览与调试",
   "bot_preview_file_cancel": "取消",
