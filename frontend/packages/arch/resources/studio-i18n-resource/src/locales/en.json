@@ -538,6 +538,7 @@
   "bot_opening_remarks_replace_confirm_button": "Confirm",
   "bot_persona_and_prompt": "Persona & Prompt",
   "bot_preview_attach_0319": "File format: image, PDF, DOCX, excel, CSV, or audio. Please {placeholder} to process the file.",
+  "bot_preview_attach_0911": "File format: image, PDF, DOCX, excel, CSV.",
   "bot_preview_attach_select": "select tools",
   "bot_preview_debug_title": "Preview & Debug",
   "bot_preview_file_cancel": "Cancel",
