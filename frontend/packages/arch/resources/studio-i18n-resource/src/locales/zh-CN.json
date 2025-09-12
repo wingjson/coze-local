@@ -2091,6 +2091,7 @@
   "bot_persona_description": "使用自然语言填写智能体的人物设定、功能和工作流程",
   "bot_preview_attach": "上传文件：image、pdf、docx、excel、csv。请 {placeholder} 处理文件。",
   "bot_preview_attach_0319": "上传文件：image、pdf、docx、excel、csv、audio。请 {placeholder} 处理文件。",
+  "bot_preview_attach_0911": "上传文件：image、pdf、docx、excel、csv。",
   "bot_preview_attach_select": "选择工具",
   "bot_preview_autoplay": "自动播放声音",
   "bot_preview_debug_title": "预览与调试",
