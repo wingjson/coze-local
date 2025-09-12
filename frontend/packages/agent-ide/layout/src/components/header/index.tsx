@@ -33,6 +33,7 @@ import { renderHtmlTitle } from '@coze-arch/bot-utils';
 import { BotPageFromEnum } from '@coze-arch/bot-typings/common';
 import { useSpaceStore } from '@coze-arch/bot-studio-store';
 import { type DraftBot } from '@coze-arch/bot-api/developer_api';
+// import { useSpaceStore as workStore } from '@coze-foundation/space-store-adapter';
 import {
   ModeSelect,
   type ModeSelectProps,
@@ -54,6 +55,9 @@ export const BotHeader: React.FC<BotHeaderProps> = props => {
   const navigate = useNavigate();
   const spaceID = useSpaceStore(state => state.space.id);
   const isReadonly = useBotDetailIsReadonly();
+  // false read only 
+  // const workflow_mode = workStore(state => state.workflow_mode);
+  // const isReadonly = !workflow_mode
   const { pageFrom } = usePageRuntimeStore(
     useShallow(state => ({
       pageFrom: state.pageFrom,

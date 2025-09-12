@@ -52,6 +52,7 @@
     "@coze-common/chat-core": "workspace:*",
     "@coze-common/chat-uikit": "workspace:*",
     "@coze-common/chat-workflow-render": "workspace:*",
+    "@coze-foundation/space-store-adapter": "workspace:*",
     "@coze-studio/user-store": "workspace:*",
     "@douyinfe/semi-icons": "^2.36.0",
     "ahooks": "^3.7.8",
