@@ -2000,6 +2000,7 @@
   "bot_persona_description": "Design the agent's persona, features and workflows using natural language.",
   "bot_preview_attach": "Attach file: image, pdf, docx, excel, csv. Please {placeholder} processing the file.",
   "bot_preview_attach_0319": "File format: image, PDF, DOCX, excel, CSV, or audio. Please {placeholder} to process the file.",
+  "bot_preview_attach_0911": "File format: image, PDF, DOCX, excel, CSV.",
   "bot_preview_attach_select": "select tools",
   "bot_preview_autoplay": "Autoplay",
   "bot_preview_debug_title": "Preview & Debug",

@@ -42,6 +42,7 @@
     "@coze-foundation/global-store": "workspace:*",
     "@coze-foundation/layout": "workspace:*",
     "@coze-foundation/space-store": "workspace:*",
+    "@coze-foundation/space-store-adapter": "workspace:*",
     "@coze-studio/bot-detail-store": "workspace:*",
     "@coze-studio/components": "workspace:*",
     "@coze-studio/entity-adapter": "workspace:*",

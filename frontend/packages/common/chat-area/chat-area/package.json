@@ -51,6 +51,7 @@
     "@coze-common/chat-uikit-shared": "workspace:*",
     "@coze-common/websocket-manager-adapter": "workspace:*",
     "@coze-data/llmPlugins": "workspace:*",
+    "@coze-foundation/space-store-adapter": "workspace:*",
     "@coze-studio/uploader-adapter": "workspace:*",
     "mitt": "^3.0.1",
     "zod": "3.22.4"

@@ -64,6 +64,7 @@ import {
   ChatInputIntegration,
   type ChatInputIntegrationController,
 } from '../components/chat-input-integration';
+import { useSpaceStore } from '@coze-foundation/space-store-adapter';
 
 import styles from './index.modules.less';
 
@@ -113,6 +114,8 @@ const ChatAreaMain: FC<ChatAreaMainProps> = ({
 
   const showBackground = useShowBackGround();
 
+  const workflow_mode = useSpaceStore(state => state.workflow_mode);
+
   const customMessageListFloatSlotList = usePluginCustomComponents(
     'MessageListFloatSlot',
   );
@@ -160,6 +163,8 @@ const ChatAreaMain: FC<ChatAreaMainProps> = ({
                             layout === Layout.PC,
                           [styles['chat-area-main-mobile'] as string]:
                             layout === Layout.MOBILE,
+                          [styles['chat-area-main-workflow-pc'] as string]:
+                            !workflow_mode && layout !== Layout.MOBILE,
                         },
                         classname,
                       )}

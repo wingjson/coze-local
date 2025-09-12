@@ -24,7 +24,7 @@ import { type BotPageFromEnum } from '@coze-arch/bot-typings/common';
 import { usePageRuntimeStore } from '@coze-studio/bot-detail-store/page-runtime';
 import { useBotSkillStore } from '@coze-studio/bot-detail-store/bot-skill';
 import { BotDebugChatArea } from '@coze-agent-ide/chat-debug-area';
-
+import { useSpaceStore ,type SpaceStoreState} from '@coze-foundation/space-store-adapter';
 import s from '../../../index.module.less';
 
 export interface AgentChatAreaProps {
@@ -57,9 +57,11 @@ export const AgentChatArea: React.FC<AgentChatAreaProps> = ({
     })),
   );
 
+  const workflow_mode = useSpaceStore(state => state.workflow_mode);
+
   return (
     <SingleSheet
-      title={I18n.t('bot_preview_debug_title')}
+      title={workflow_mode ? I18n.t('bot_preview_debug_title') : null}
       titleClassName={classNames(
         showBackground ? '!coz-fg-images-white' : '',
         '!text-[16px]',

@@ -54,6 +54,7 @@
     "@coze-common/prompt-kit": "workspace:*",
     "@coze-data/knowledge-modal-adapter": "workspace:*",
     "@coze-data/knowledge-modal-base": "workspace:*",
+    "@coze-foundation/space-store-adapter": "workspace:*",
     "@coze-studio/autosave": "workspace:*",
     "@coze-studio/bot-detail-store": "workspace:*",
     "@coze-studio/components": "workspace:*",
