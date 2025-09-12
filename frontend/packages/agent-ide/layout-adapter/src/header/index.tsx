@@ -20,6 +20,16 @@ import { DuplicateBot } from '@coze-studio/components';
 import { usePageRuntimeStore } from '@coze-studio/bot-detail-store/page-runtime';
 import { useBotInfoStore } from '@coze-studio/bot-detail-store/bot-info';
 import { useBotDetailIsReadonly } from '@coze-studio/bot-detail-store';
+import { useSpaceStore ,type SpaceStoreState} from '@coze-foundation/space-store-adapter';
+import {
+  Button,
+  Form,
+  type FormApi,
+  IconButton,
+  Popover,
+  Typography,
+} from '@coze-arch/coze-design';
+import { IconCozTamplate } from '@coze-arch/coze-design/icons';
 import {
   type BotHeaderProps,
   DeployButton,
@@ -43,6 +53,19 @@ export const HeaderAddonAfter: React.FC<HeaderAddonAfterProps> = ({
       botInfo: state,
     })),
   );
+  // add workflow mode 
+  // Date:2025/09/11
+  const { workflow_mode, setWorkFlowMode } = useSpaceStore(
+    useShallow((state:SpaceStoreState )=> ({
+      workflow_mode: state.workflow_mode,
+      setWorkFlowMode: state.setWorkFlowMode,
+    }))
+  );
+
+  const handleToggleMode = () => {
+    setWorkFlowMode(!workflow_mode);
+  };
+  
   return (
     <div className="flex items-center gap-2">
       {/** 3.1 State Zone */}
@@ -62,6 +85,15 @@ export const HeaderAddonAfter: React.FC<HeaderAddonAfterProps> = ({
               {/** Function button area */}
               <MoreMenuButton />
             </div>
+            <IconButton
+              icon={<IconCozTamplate />}
+              iconPosition="left"
+              color="secondary"
+              size="small"
+              onClick={handleToggleMode}
+             >
+                  切换调试模式
+            </IconButton>
             {/** Submit post related button */}
             <div className="flex items-center gap-2">
               {editable ? <DeployButton /> : null}

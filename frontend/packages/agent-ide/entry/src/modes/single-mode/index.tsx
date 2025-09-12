@@ -24,6 +24,7 @@ import { BotPageFromEnum } from '@coze-arch/bot-typings/common';
 import { BotMode, TabStatus } from '@coze-arch/bot-api/developer_api';
 import { AbilityAreaContainer } from '@coze-agent-ide/tool';
 import { useBotPageStore } from '@coze-agent-ide/space-bot/store';
+import { useSpaceStore ,type SpaceStoreState} from '@coze-foundation/space-store-adapter';
 import {
   ContentView,
   BotDebugPanel,
@@ -73,6 +74,8 @@ export const SingleMode: React.FC<SingleModeProps> = ({
 
   const [isAllToolHidden, setIsAllToolHidden] = useState(defaultAllHidden);
 
+  const workflow_mode = useSpaceStore(state => state.workflow_mode);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onAllToolHiddenStatusChange = (_isAllToolHidden: any) => {
     setIsAllToolHidden(_isAllToolHidden);
@@ -99,13 +102,16 @@ export const SingleMode: React.FC<SingleModeProps> = ({
         <ContentView
           mode={BotMode.SingleMode}
           className={classNames({
+            [s.contentViewFlex]: !workflow_mode,
             [s['wrapper-single-with-tool-area-hidden']]: isAllToolHidden,
           })}
         >
-          <AgentConfigArea
-            isAllToolHidden={isAllToolHidden}
-            {...agentConfigAreaProps}
-          />
+          {workflow_mode && (
+            <AgentConfigArea
+              isAllToolHidden={isAllToolHidden}
+              {...agentConfigAreaProps}
+            />
+          )}
           <AgentChatArea
             renderChatTitleNode={renderChatTitleNode}
             chatSlot={chatSlot}
