@@ -54,6 +54,7 @@ import './index.less';
 interface OnBoardingProps {
   avatar?: string;
   name?: string;
+  description?:string;
   prologue?: string;
   suggestionList?: IMessage[];
   /**
@@ -84,6 +85,7 @@ interface BotInfoProps {
   avatar: string | undefined;
   onError: () => void;
   name: string | undefined;
+  description:string | undefined;
 }
 
 const BotInfo: React.FC<BotInfoProps & BotInfoVariantProps> = ({
@@ -91,6 +93,7 @@ const BotInfo: React.FC<BotInfoProps & BotInfoVariantProps> = ({
   wrapperClassName,
   onError,
   name,
+  description,
   showBackground,
 }) => (
   <div className={wrapperClassName}>
@@ -110,6 +113,16 @@ const BotInfo: React.FC<BotInfoProps & BotInfoVariantProps> = ({
         {name}
       </Typography.Text>
     ) : null}
+    {description ? (
+      <Typography.Text
+        ellipsis
+        className={`${typeSafeBotInfoNameVariants({
+          showBackground: Boolean(showBackground),
+        })} text-sm mt-2`}
+      >
+        {description}
+      </Typography.Text>
+    ) : null}
   </div>
 );
 
@@ -118,6 +131,7 @@ export const OnBoarding = forwardRef<HTMLDivElement, OnBoardingProps>(
     const {
       avatar,
       name,
+      description,
       prologue,
       suggestionList,
       readonly,
@@ -164,6 +178,7 @@ export const OnBoarding = forwardRef<HTMLDivElement, OnBoardingProps>(
             )}
             avatar={botAvatar}
             name={name}
+            description={description}
             showBackground={showBackground}
             onError={() => setBotAvatar(defaultAvatar)}
           />

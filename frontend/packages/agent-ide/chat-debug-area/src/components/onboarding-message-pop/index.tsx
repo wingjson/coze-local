@@ -110,12 +110,14 @@ export const OnboardingMessagePop: ComponentTypesMap['onboarding'] = ({
     name,
     mode,
     id = '',
+    description
   } = useBotInfoStore(
     useShallow(state => ({
       mode: state.mode,
       avatar: state.icon_url,
       name: state.name,
       id: state.botId,
+      description:state.description
     })),
   );
   const { onBoardingSuggestionWrap } = useBotSkillStore(
@@ -221,6 +223,7 @@ export const OnboardingMessagePop: ComponentTypesMap['onboarding'] = ({
       style={{ marginTop }}
       className={s['ui-kit-onboarding']}
       name={name}
+      description={description}
       avatar={avatar}
       prologue={debouncedPrologue}
       suggestionListWithString={suggestions.map(sug => sug.content)}

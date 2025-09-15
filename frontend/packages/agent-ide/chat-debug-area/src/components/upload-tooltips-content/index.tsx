@@ -20,6 +20,7 @@ import { useBotDetailIsReadonly } from '@coze-studio/bot-detail-store';
 import { I18n } from '@coze-arch/i18n';
 import { OpenModalEvent, emitEvent } from '@coze-arch/bot-utils';
 import { BotMode } from '@coze-arch/bot-api/playground_api';
+import { useSpaceStore } from '@coze-foundation/space-store-adapter';
 
 import s from './index.module.less';
 
@@ -29,8 +30,8 @@ export const UploadTooltipsContent = () => {
   const mode = useBotInfoStore(state => state.mode);
   const isMulti = mode === BotMode.MultiMode;
   const isWorkflow = mode === BotMode.WorkflowMode;
-
-  const botPreviewAttachI18nKey = 'bot_preview_attach_0319';
+  const workflow_mode = useSpaceStore(state => state.workflow_mode);
+  const botPreviewAttachI18nKey = workflow_mode ? 'bot_preview_attach_0319' : 'bot_preview_attach_0911';
 
   const addApi = () => {
     if (isReadonly) {

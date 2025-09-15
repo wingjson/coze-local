@@ -27,6 +27,7 @@ import (
 	product_public_api "github.com/coze-dev/coze-studio/backend/api/model/marketplace/product_public_api"
 	"github.com/coze-dev/coze-studio/backend/api/model/workflow"
 	appworkflow "github.com/coze-dev/coze-studio/backend/application/workflow"
+	"github.com/coze-dev/coze-studio/backend/pkg/lang/ptr"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -189,16 +190,6 @@ func PublicDuplicateProduct(ctx context.Context, c *app.RequestContext) {
 
 	switch req.GetEntityType() {
 	case product_common.ProductEntityType_BotTemplate:
-		modelListResp, err := modelmgr.ModelmgrApplicationSVC.GetModelList(ctx, &developer_api.GetTypeListRequest{})
-		if err != nil {
-			internalServerErrorResponse(ctx, c, err)
-			return
-		}
-		if modelListResp == nil || modelListResp.Data == nil || len(modelListResp.Data.ModelList) == 0 {
-			invalidParamRequestResponse(c, "no model found")
-			return
-		}
-
 		bot, err := singleagent.SingleAgentSVC.DuplicateDraftBot(ctx, &developer_api.DuplicateDraftBotRequest{
 			BotID:   req.GetProductID(),
 			SpaceID: req.GetSpaceID(),
@@ -216,29 +207,106 @@ func PublicDuplicateProduct(ctx context.Context, c *app.RequestContext) {
 			return
 		}
 		if botInfo.Data == nil || botInfo.Data.BotInfo == nil {
-			invalidParamRequestResponse(c, "no bot info found")
+			invalidParamRequestResponse(c, "no bot info found after duplication")
 			return
 		}
+		//202509-15   add copy workflow
+		newWorkflowList := make([]*bot_common.WorkflowInfo, 0)
+		if botInfo.Data.BotInfo.WorkflowInfoList != nil {
+			spaceIDStr := strconv.FormatInt(req.GetSpaceID(), 10)
 
-		modelInfo := botInfo.GetData().GetBotInfo().ModelInfo
-		if modelInfo == nil {
-			invalidParamRequestResponse(c, "no model info found in agent")
+			for index, originalWorkflow := range botInfo.Data.BotInfo.WorkflowInfoList {
+				if originalWorkflow == nil || originalWorkflow.WorkflowId == nil {
+					continue
+				}
+
+				workflowResp, err := appworkflow.SVC.CopyWorkflow(ctx, &workflow.CopyWorkflowRequest{
+					WorkflowID: strconv.FormatInt(*originalWorkflow.WorkflowId, 10),
+					SpaceID:    spaceIDStr,
+				})
+				if err != nil {
+					internalServerErrorResponse(ctx, c, err)
+					return
+				}
+				var finalWorkflowName *string
+				if req.Name != nil && *req.Name != "" {
+					var newNameStr string
+					if originalWorkflow.WorkflowName != nil && *originalWorkflow.WorkflowName != "" {
+						newNameStr = *req.Name + "_" + *originalWorkflow.WorkflowName
+					} else {
+						newNameStr = *req.Name + "_工作流_" + strconv.Itoa(index+1)
+					}
+					finalWorkflowName = &newNameStr
+					_, err = appworkflow.SVC.UpdateWorkflowMeta(ctx, &workflow.UpdateWorkflowMetaRequest{
+						WorkflowID: workflowResp.Data.WorkflowID,
+						SpaceID:    spaceIDStr,
+						Name:       finalWorkflowName,
+					})
+					if err != nil {
+						internalServerErrorResponse(ctx, c, err)
+						return
+					}
+
+					//publish
+					publishReq := &workflow.PublishWorkflowRequest{
+						WorkflowID:         workflowResp.Data.WorkflowID,
+						SpaceID:            spaceIDStr,
+						HasCollaborator:    false,
+						Force:              ptr.Of(true),
+						WorkflowVersion:    ptr.Of("v0.0.1"),
+						VersionDescription: ptr.Of("Copied from template"),
+					}
+					_, err = appworkflow.SVC.PublishWorkflow(ctx, publishReq)
+					if err != nil {
+						internalServerErrorResponse(ctx, c, err)
+						return
+					}
+
+				} else {
+					finalWorkflowName = originalWorkflow.WorkflowName
+				}
+
+				newWorkflowID, err := strconv.ParseInt(workflowResp.Data.WorkflowID, 10, 64)
+				if err != nil {
+					internalServerErrorResponse(ctx, c, err)
+					return
+				}
+
+				newWorkflowList = append(newWorkflowList, &bot_common.WorkflowInfo{
+					WorkflowId:   &newWorkflowID,
+					PluginId:     &newWorkflowID,
+					WorkflowName: finalWorkflowName,
+					FlowMode:     originalWorkflow.FlowMode,
+				})
+			}
+		}
+
+		modelListResp, err := modelmgr.ModelmgrApplicationSVC.GetModelList(ctx, &developer_api.GetTypeListRequest{})
+		if err != nil {
+			internalServerErrorResponse(ctx, c, err)
 			return
+		}
+		if modelListResp == nil || modelListResp.Data == nil || len(modelListResp.Data.ModelList) == 0 {
+			invalidParamRequestResponse(c, "no model found")
+			return
+		}
+		modelInfo := botInfo.GetData().GetBotInfo().GetModelInfo()
+		if modelInfo == nil {
+			modelInfo = &bot_common.ModelInfo{}
 		}
 		modelInfo.ModelId = &modelListResp.Data.ModelList[0].ModelType
 
-		if req.Name != nil {
-			_, err = singleagent.SingleAgentSVC.UpdateSingleAgentDraft(ctx, &playground.UpdateDraftBotInfoAgwRequest{
-				BotInfo: &bot_common.BotInfoForUpdate{
-					BotId:     &bot.Data.BotID,
-					Name:      req.Name,
-					ModelInfo: modelInfo,
-				},
-			})
-			if err != nil {
-				internalServerErrorResponse(ctx, c, err)
-				return
-			}
+		_, err = singleagent.SingleAgentSVC.UpdateSingleAgentDraft(ctx, &playground.UpdateDraftBotInfoAgwRequest{
+			BotInfo: &bot_common.BotInfoForUpdate{
+				BotId:            &bot.Data.BotID,
+				Name:             req.Name,
+				ModelInfo:        modelInfo,
+				WorkflowInfoList: newWorkflowList,
+			},
+		})
+		if err != nil {
+			internalServerErrorResponse(ctx, c, err)
+			return
 		}
 
 		resp.Data.NewEntityID = bot.Data.BotID
