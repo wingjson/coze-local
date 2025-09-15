@@ -33,7 +33,7 @@ import { renderHtmlTitle } from '@coze-arch/bot-utils';
 import { BotPageFromEnum } from '@coze-arch/bot-typings/common';
 import { useSpaceStore } from '@coze-arch/bot-studio-store';
 import { type DraftBot } from '@coze-arch/bot-api/developer_api';
-// import { useSpaceStore as workStore } from '@coze-foundation/space-store-adapter';
+import { useSpaceStore as workStore } from '@coze-foundation/space-store-adapter';
 import {
   ModeSelect,
   type ModeSelectProps,
@@ -54,10 +54,10 @@ export interface BotHeaderProps {
 export const BotHeader: React.FC<BotHeaderProps> = props => {
   const navigate = useNavigate();
   const spaceID = useSpaceStore(state => state.space.id);
-  const isReadonly = useBotDetailIsReadonly();
+  // const isReadonly = useBotDetailIsReadonly();
   // false read only 
-  // const workflow_mode = workStore(state => state.workflow_mode);
-  // const isReadonly = !workflow_mode
+  const workflow_mode = workStore(state => state.workflow_mode);
+  const isReadonly = !workflow_mode
   const { pageFrom } = usePageRuntimeStore(
     useShallow(state => ({
       pageFrom: state.pageFrom,
@@ -134,7 +134,7 @@ export const BotHeader: React.FC<BotHeaderProps> = props => {
             deployButton={props.deployButton}
           />
           {/** 模式选择器 */}
-          {diffTask ? null : <ModeSelect optionList={props.modeOptionList} />}
+          {workflow_mode && !diffTask && <ModeSelect optionList={props.modeOptionList} />}
         </div>
 
         {/* 2. Middle bot menu area - offline */}
