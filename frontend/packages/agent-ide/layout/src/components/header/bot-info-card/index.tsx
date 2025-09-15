@@ -59,7 +59,7 @@ const BotInfoCardContent = ({ deployButton }: { deployButton: ReactNode }) => {
         </Typography.Text>
 
         <div className="flex items-cente">
-          <Tag
+          {/* <Tag
             color="primary"
             className="max-w-[160px] !bg-transparent !coz-fg-secondary !p-0"
             prefixIcon={
@@ -67,7 +67,7 @@ const BotInfoCardContent = ({ deployButton }: { deployButton: ReactNode }) => {
             }
           >
             {spaceName}
-          </Tag>
+          </Tag> */}
           <BotPublishStatus deployButton={deployButton} />
         </div>
 
