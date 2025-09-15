@@ -51,6 +51,8 @@ import { OnboardingMessage } from '@coze-agent-ide/onboarding-message-adapter';
 import { BotDebugChatArea } from '@coze-agent-ide/chat-debug-area';
 import { BotConfigArea } from '@coze-agent-ide/bot-config-area-adapter';
 
+import { useSpaceStore ,type SpaceStoreState} from '@coze-foundation/space-store-adapter';
+
 import s from '../../index.module.less';
 export interface WorkflowModeProps {
   rightSheetSlot?: ReactNode;
@@ -98,6 +100,8 @@ export const WorkflowMode: React.FC<WorkflowModeProps> = ({
   const modeSwitching = useBotPageStore(state => state.bot.modeSwitching);
 
   const isReadonly = useBotDetailIsReadonly();
+
+  const workflow_mode = useSpaceStore(state => state.workflow_mode);
 
   const toolArea = (
     <div className="overflow-hidden h-full flex">
@@ -235,8 +239,19 @@ export const WorkflowMode: React.FC<WorkflowModeProps> = ({
             className="h-full"
             hotZoneClassName={s['layout-hotzone']}
           >
-            <div className="w-1/2 min-w-[610px]">{leftSheet}</div>
-            <div className="w-1/2 min-w-[480px]">{rightSheet}</div>
+            {workflow_mode && (<div className="w-1/2 min-w-[610px]">{leftSheet}</div>)}
+            {/* <div className="w-1/2 min-w-[480px]">{rightSheet}</div> */}
+            <div
+              className={classNames(
+                'min-w-[480px]', // This class is always applied
+                {
+                  'w-1/2': workflow_mode,   // Applied only when workflow_mode is true
+                  'w-full': !workflow_mode, // Applied only when workflow_mode is false
+                }
+              )}
+            >
+              {rightSheet}
+            </div>
           </ResizableLayout>
         </ContentView>
 

@@ -169,7 +169,8 @@ const ChatAreaMain: FC<ChatAreaMainProps> = ({
                         classname,
                       )}
                     >
-                      <div className={styles['header-node']}>{headerNode}</div>
+                      {/* <div className={styles['header-node']}>{headerNode}</div> */}
+                      {workflow_mode && <div className={styles['header-node']}>{headerNode}</div>}
                       {customMessageListFloatSlotList.map(
                         // eslint-disable-next-line @typescript-eslint/naming-convention -- as expected
                         ({ pluginName, Component }) => (
