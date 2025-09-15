@@ -25,6 +25,7 @@
     "@coze-foundation/space-store-adapter": "workspace:*",
     "@coze-studio/bot-detail-store": "workspace:*",
     "@coze-studio/components": "workspace:*",
+    "@douyinfe/semi-icons": "^2.36.0",
     "classnames": "^2.3.2",
     "react-router-dom": "^6.11.1",
     "zustand": "^4.4.7"
