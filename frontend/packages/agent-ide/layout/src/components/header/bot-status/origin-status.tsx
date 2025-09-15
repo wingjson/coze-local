@@ -27,6 +27,7 @@ import {
   type ConnectorInfo,
 } from '@coze-arch/bot-api/developer_api';
 import { IconAlertCircle } from '@douyinfe/semi-icons';
+import { useSpaceStore as workStore } from '@coze-foundation/space-store-adapter';
 
 import s from './style.module.less';
 
@@ -37,6 +38,7 @@ export function OriginStatus() {
       savingInfoTime: store.savingInfo.time,
     })),
   );
+  const workflow_mode = workStore(state => state.workflow_mode);
 
   return (
     <>
@@ -46,7 +48,7 @@ export function OriginStatus() {
         loading={savingInfoSaving}
         prefixIcon={savingInfoSaving ? <IconCozLoading /> : null}
       >
-        {savingInfoSaving ? (
+        {/* {savingInfoSaving ? (
           <div className={s['status-tag-spin']}>
             <span>{I18n.t('bot_autosave_saving')}</span>
           </div>
@@ -54,6 +56,17 @@ export function OriginStatus() {
           I18n.t('devops_publish_multibranch_auto_saved', {
             time: savingInfoTime,
           })
+        )} */}
+        {workflow_mode && (
+          savingInfoSaving ? (
+            <div className={s['status-tag-spin']}>
+              <span>{I18n.t('bot_autosave_saving')}</span>
+            </div>
+          ) : (
+            I18n.t('devops_publish_multibranch_auto_saved', {
+              time: savingInfoTime,
+            })
+          )
         )}
       </Tag>
     </>

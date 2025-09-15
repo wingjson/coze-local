@@ -30,6 +30,9 @@ import {
   Typography,
 } from '@coze-arch/coze-design';
 import { IconCozTamplate } from '@coze-arch/coze-design/icons';
+
+import { IconEdit2Stroked ,IconVoteStroked} from '@douyinfe/semi-icons';
+{/* <IconEdit2Stroked /><IconVoteStroked /> */}
 import {
   type BotHeaderProps,
   DeployButton,
@@ -86,22 +89,31 @@ export const HeaderAddonAfter: React.FC<HeaderAddonAfterProps> = ({
               <MoreMenuButton />
             </div>
             <IconButton
-              icon={<IconCozTamplate />}
+              icon={workflow_mode ? <IconVoteStroked /> : <IconEdit2Stroked />}
               iconPosition="left"
               color="secondary"
-              size="small"
+              size="default"
               onClick={handleToggleMode}
              >
-                  切换调试模式
+                  {workflow_mode ? '切换发布模式' : '切换调试模式'}
             </IconButton>
             {/** Submit post related button */}
-            <div className="flex items-center gap-2">
+             {workflow_mode && (
+              <div className="flex items-center gap-2">
+                {editable ? <DeployButton /> : null}
+                {!editable && botInfo && botId ? (
+                  <DuplicateBot botID={botId} />
+                ) : null}
+                <div id="diff-task-button-container"></div>
+              </div>
+            )}
+            {/* <div className="flex items-center gap-2">
               {editable ? <DeployButton /> : null}
               {!editable && botInfo && botId ? (
                 <DuplicateBot botID={botId} />
               ) : null}
               <div id="diff-task-button-container"></div>
-            </div>
+            </div> */}
           </>
         ) : null}
       </div>
