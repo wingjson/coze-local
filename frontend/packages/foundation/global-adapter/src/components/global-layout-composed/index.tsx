@@ -15,7 +15,7 @@
  */
 
 import { useParams } from 'react-router-dom';
-import { type FC, type PropsWithChildren } from 'react';
+import { useEffect, type FC, type PropsWithChildren } from 'react';
 
 import { GlobalLayout } from '@coze-foundation/layout';
 import { useCreateBotAction } from '@coze-foundation/global';
@@ -44,6 +44,11 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
   const hasSider = useHasSider();
   const { space_id } = useParams();
   const personalSpaceID = useSpaceStore.getState().getPersonalSpaceID();
+  console.log(personalSpaceID)
+  const {
+      space: { id: spaceId, space_type },
+    } = useSpaceStore.getState();
+  console.log(spaceId,22222222222222)
   const { createBot, createBotModal } = useCreateBotAction({
     currentSpaceId: space_id,
   });
@@ -62,7 +67,7 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
             onClick: createBot,
             dataTestId: 'layout_create-agent-button',
             className: '!w-[200px] !h-[35px] !bg-[#4780ff]',
-            label: '创建智能体',
+            label: I18n.t('create_agent'),
             iconClass: '!text-white flex items-center gap-x-2',
           },
         ]}

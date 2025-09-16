@@ -15992,6 +15992,9 @@ importers:
       '@coze-foundation/account-ui-base':
         specifier: workspace:*
         version: link:../account-ui-base
+      '@coze-foundation/space-store-adapter':
+        specifier: workspace:*
+        version: link:../space-store-adapter
       '@coze-studio/api-schema':
         specifier: workspace:*
         version: link:../../arch/api-schema
