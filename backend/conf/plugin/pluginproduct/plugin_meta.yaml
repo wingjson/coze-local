@@ -914,11 +914,11 @@
   plugin_type: 1
   manifest:
     schema_version: 'v1'
-    name_for_model: 'fileread'
-    name_for_human: '文档读取'
-    description_for_model: '根据传入的url读取文档内容/html转word'
+    name_for_model: 'fileprocess'
+    name_for_human: '文档处理'
+    description_for_model: '文档处理插件，支持根据url读取word/html转word'
     description_for_human: '根据传入的url读取文档内容/html转word'
-    logo_url: 'default_icon/plugin_default_icon.png'
+    logo_url: 'default_icon/file_process.png'
     api:
       type: 'openapi'
     common_params:
@@ -953,3 +953,7 @@
       deprecated: false
       method: post
       sub_url: /plug/process-excel
+    - tool_id: 230006
+      deprecated: false
+      method: post
+      sub_url: /plug/export-to-excel
