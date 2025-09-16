@@ -152,9 +152,9 @@ export const Develop: FC<DevelopProps> = ({ spaceId }) => {
             <span>{I18n.t('workspace_develop')}</span>
           </HeaderTitle>
           <HeaderActions>
-            <Button icon={<IconCozPlus />} onClick={actions.createIntelligence}>
+            {/* <Button icon={<IconCozPlus />} onClick={actions.createIntelligence}>
               {I18n.t('workspace_create')}
-            </Button>
+            </Button> */}
           </HeaderActions>
         </Header>
         <SubHeader>

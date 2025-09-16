@@ -1,12 +1,12 @@
 openapi: 3.0.1
 info:
   title: 文档与图表统一服务
-  description: 一个统一的后端服务，提供文档内容读取、图表生成和文件格式转换功能。
+  description: 提供文档内容读取、图表生成和文件格式转换功能。
   version: v1
 
 servers:
   - url: http://192.168.107.16:5000
-    description: 本地开发服务器
+    description: 文件处理
 
 paths:
   /plug/process-file:
@@ -72,12 +72,12 @@ paths:
                   data:
                     type: string
                     description: 包含每个图表标题及其对应下载URL的字典。
-                    example: "# 这是一个标题\n\n这是一个段落。"
+                    example: "http://test.com/test.png"
 
   /plug/md-to-word:
     post:
       summary: Markdown转换为Word文档
-      description: 接收一段Markdown格式的文本，使用Pandoc将其转换为.docx格式的Word文档，并返回下载链接。
+      description: 接收一段Markdown格式的文本，将其转换为.docx格式的Word文档，并返回下载链接。
       operationId: exportMdToWord
       requestBody:
         required: true
@@ -105,12 +105,12 @@ paths:
                     example: success
                   url:
                     type: string
-                    example: 'http://192.168.107.16:5000/api/downloads/docs/some-uuid.docx'
+                    example: 'http://test.com/docs/some-uuid.docx'
 
   /plug/export-to-word:
     post:
       summary: HTML转换为Word文档
-      description: 接收一段HTML代码，使用Pandoc将其转换为.docx格式的Word文档，并返回下载链接。
+      description: 接收一段HTML代码，将其转换为.docx格式的Word文档，并返回下载链接。
       operationId: exportHtmlToWord
       requestBody:
         required: true
@@ -138,12 +138,12 @@ paths:
                     example: success
                   url:
                     type: string
-                    example: 'http://192.168.107.16:5000/api/downloads/docs/some-uuid.docx'
+                    example: 'http://test.com/docs/some-uuid.docx'
 
   /plug/process-excel:
     post:
-      summary: 读取excel
-      description: 接收一段HTML代码，使用Pandoc将其转换为.docx格式的Word文档，并返回下载链接。
+      summary: 根据url读取excel
+      description: 接收url，读取excel内容并返回。
       operationId: readExcel
       requestBody:
         required: true
@@ -157,7 +157,7 @@ paths:
                 url:
                   type: string
                   description: url
-                  example: '<h1>这是一个标题</h1><p>这是一个段落。</p>'
+                  example: 'http://test.com/docs/some-uuid.excel'
       responses:
         '200':
           description: 成功转换文档。
@@ -172,4 +172,37 @@ paths:
                   data:
                     type: string
                     description: data
-                    example: '<h1>这是一个标题</h1><p>这是一个段落。</p>'
+                    example: '"列1": "值A", "列2": "值B"'
+
+  /plug/export-to-excel:
+    post:
+      summary: json数据转excel
+      description: 接收一段json数据，将其转换为excel文档，并返回下载链接。
+      operationId: exportHtmlToWord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  type: string
+                  description: json格式数据。
+                  example: '{ "列1": "值A", "列2": "值B", "列3": "值C" },{ "列1": "值D", "列2": "值E", "列3": "值F" }'
+      responses:
+        '200':
+          description: 成功转换文档。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  url:
+                    type: string
+                    example: 'http://test.com/docs/some-uuid.docx'

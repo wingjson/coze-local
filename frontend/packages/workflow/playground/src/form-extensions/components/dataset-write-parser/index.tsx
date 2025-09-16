@@ -141,7 +141,7 @@ export const DatasetWriteParser: FC<RadioProps> = props => {
             readonly={readonly}
             dataTestId={getNodeSetterId('dataset-write-imageExtraction')}
           />
-          <CheckboxWithLabel
+          {/* <CheckboxWithLabel
             label={I18n.t('kl_write_009')}
             checked={value?.imageOcr}
             onChange={v =>
@@ -153,7 +153,7 @@ export const DatasetWriteParser: FC<RadioProps> = props => {
             disabled={isImageOcrDisable}
             readonly={readonly}
             dataTestId={getNodeSetterId('dataset-write-imageOcr')}
-          />
+          /> */}
           <CheckboxWithLabel
             label={I18n.t('kl_write_010')}
             checked={value?.tableExtraction}

@@ -67,9 +67,9 @@ export const DocumentParseForm: React.FC<DocumentParseFormProps> = ({
           <IconCozInfoCircle className="coz-fg-secondary w-[14px] ml-[4px]" />
         </Tooltip>
       </Form.Checkbox>
-      <Form.Checkbox noLabel field={FORM_FIELD_KEY_MAP.image_ocr}>
+      {/* <Form.Checkbox noLabel field={FORM_FIELD_KEY_MAP.image_ocr}>
         {I18n.t('kl_write_009')}
-      </Form.Checkbox>
+      </Form.Checkbox> */}
       <Form.Checkbox noLabel field={FORM_FIELD_KEY_MAP.table_extraction}>
         {I18n.t('kl_write_010')}
       </Form.Checkbox>
