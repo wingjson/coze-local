@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 
 import { useRequest } from 'ahooks';
 import { passport } from '@coze-studio/api-schema';
+import { useSpaceStore } from '@coze-foundation/space-store-adapter';
 import {
   setUserInfo,
   useLoginStatus,
@@ -42,7 +43,14 @@ export const useLoginService = ({
     },
     {
       manual: true,
-      onSuccess: setUserInfo,
+      onSuccess: userInfo => {
+        // ✨ 2. 在 onSuccess 回调中进行调用
+        console.log('登录成功，设置用户信息...');
+        setUserInfo(userInfo); // 保留原有逻辑
+
+        console.log('开始获取用户空间数据...');
+        useSpaceStore.getState().fetchSpaces(true); // 添加新逻辑
+      },
     },
   );
 
@@ -56,7 +64,15 @@ export const useLoginService = ({
     },
     {
       manual: true,
-      onSuccess: setUserInfo,
+      // onSuccess: setUserInfo,
+      onSuccess: userInfo => {
+        // ✨ 2. 在 onSuccess 回调中进行调用
+        console.log('登录成功，设置用户信息...');
+        setUserInfo(userInfo); // 保留原有逻辑
+
+        console.log('开始获取用户空间数据...');
+        useSpaceStore.getState().fetchSpaces(true); // 添加新逻辑
+      },
     },
   );
 
