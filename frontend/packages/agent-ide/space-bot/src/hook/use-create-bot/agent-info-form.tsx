@@ -137,7 +137,7 @@ export const AgentInfoForm = forwardRef<
         maxLength={botInputLengthService.getInputLengthLimit('botDescription')}
         getValueLength={botInputLengthService.getValueLength}
       />
-      {showSpace && mode === 'add' ? (
+      {/* {showSpace && mode === 'add' ? (
         <FormSelect
           label={I18n.t('duplicate_select_workspace')}
           field="spaceId"
@@ -197,7 +197,7 @@ export const AgentInfoForm = forwardRef<
               </FormSelect.Option>
             ))}
         </FormSelect>
-      ) : null}
+      ) : null} */}
       {slot}
       {checkErr ? (
         <div className={s['content-check-error']}>
