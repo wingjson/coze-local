@@ -16,7 +16,7 @@
 
 import { passport } from '@coze-studio/api-schema';
 import { setUserInfo, type UserInfo } from '@coze-foundation/account-adapter';
-
+import { useSpaceStore } from '@coze-foundation/space-store-adapter';
 /**
  * 这是一个执行 SSO 登录/验证的异步函数。
  * @param {string} token - 从外部获取的单点登录 Token
@@ -28,10 +28,6 @@ export async function performSsoLogin({
   ctx: string;
 }): Promise<UserInfo | null> {
   try {
-    console.log(
-      '[AuthService] 正在尝试使用 Token 进行 SSO 登录..., token:',
-      ctx,
-    );
     const res = await passport.SsoCheckLoginPost({
       ctx: ctx,
     });
@@ -46,8 +42,7 @@ export async function performSsoLogin({
     }
 
     setUserInfo(userInfo);
-    localStorage.setItem('loginStatus', 'logined');
-    console.log('[AuthService] SSO 登录成功:', userInfo);
+    useSpaceStore.getState().fetchSpaces(true);
 
     return userInfo;
   } catch (error) {
