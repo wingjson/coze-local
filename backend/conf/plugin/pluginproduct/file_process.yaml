@@ -178,7 +178,7 @@ paths:
     post:
       summary: json数据转excel
       description: 接收一段json数据，将其转换为excel文档，并返回下载链接。
-      operationId: exportHtmlToWord
+      operationId: exportDataToWord
       requestBody:
         required: true
         content:
