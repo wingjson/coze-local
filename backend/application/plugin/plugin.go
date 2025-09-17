@@ -203,7 +203,7 @@ func (p *PluginApplicationService) buildProductMetaInfo(ctx context.Context, plu
 		Status:      productCommon.ProductStatus_Listed,
 		ListedAt:    time.Now().Unix(),
 		UserInfo: &productCommon.UserInfo{
-			Name: "Coze Official",
+			Name: "铁科智问",
 		},
 	}, nil
 }
