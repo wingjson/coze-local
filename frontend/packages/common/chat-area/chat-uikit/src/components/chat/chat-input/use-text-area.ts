@@ -120,15 +120,18 @@ export const useTextSend = ({
     if (!allowEmpty && !inputText.trim()) {
       return;
     }
-
     if (isDisabled) {
       return;
     }
     if (onBeforeSubmit && !onBeforeSubmit()) {
       return;
     }
-
-    onSubmit(inputText);
+    // onSubmit(inputText);
+    if (!inputText.trim()) {
+      onSubmit('欢迎使用铁科智问智能体！');
+    } else {
+      onSubmit(inputText);
+    }
 
     setInputText('');
   };
