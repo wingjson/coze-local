@@ -206,3 +206,77 @@ paths:
                   url:
                     type: string
                     example: 'http://test.com/docs/some-uuid.docx'
+  /plug/process-zip:
+    post:
+      summary: 根据url读取zip压缩包，压缩包内支持txt，pdf，docx
+      description: 接收url读取zip压缩包，读取文件内容并返回，压缩包内支持txt，pdf，docx，。
+      operationId: readZip
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+              properties:
+                url:
+                  type: string
+                  description: url
+                  example: 'http://test.com/docs/some-uuid.zip'
+      responses:
+        '200':
+          description: 读取成功。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        content:
+                          type: string
+                        name:
+                          type: string
+                  status:
+                    type: string
+  /plug/fill-word-template:
+    post:
+      summary: 根据模板生成word
+      description: 根据模板生成word。
+      operationId: generateWord
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - main_title
+                - content_data
+              properties:
+                main_title:
+                  type: string
+                  description: main_title
+                  example: 'http://test.com/docs/some-uuid.zip'
+                content_data:
+                  type: string
+                  description: main_title
+                  example: 'http://test.com/docs/some-uuid.zip'
+      responses:
+        '200':
+          description: 读取成功。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  url:
+                    type: string
+                    example: 'http://test.com/docs/some-uuid.docx'
