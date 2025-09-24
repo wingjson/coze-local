@@ -957,3 +957,11 @@
       deprecated: false
       method: post
       sub_url: /plug/export-to-excel
+    - tool_id: 230007
+      deprecated: false
+      method: post
+      sub_url: /plug/process-zip
+    - tool_id: 230008
+      deprecated: false
+      method: post
+      sub_url: /plug/fill-word-template

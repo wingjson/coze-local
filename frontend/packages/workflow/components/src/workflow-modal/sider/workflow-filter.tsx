@@ -220,12 +220,12 @@ const WorkflowFilter = forwardRef<
           category: WorkflowCategory.Project,
         });
       }
-      tempList.push({
-        title: I18n.t('workflow_add_example'),
-        icon: <IconCozKnowledgeFill className={s['tool-tag-list-cell-icon']} />,
-        testId: 'workflow.modal.search.option.example',
-        category: WorkflowCategory.Example,
-      });
+      // tempList.push({
+      //   title: I18n.t('workflow_add_example'),
+      //   icon: <IconCozKnowledgeFill className={s['tool-tag-list-cell-icon']} />,
+      //   testId: 'workflow.modal.search.option.example',
+      //   category: WorkflowCategory.Example,
+      // });
       return tempList.filter(
         item => !hiddenWorkflowCategories.includes(item.category),
       );

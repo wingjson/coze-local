@@ -142,14 +142,14 @@ const getTypeFilters = () => ({
       ),
       value: 1,
     },
-    {
-      label: (
-        <span data-testid="space.library.filter.knowledge.image">
-          {I18n.t('library_filter_tags_image')}
-        </span>
-      ),
-      value: 2,
-    },
+    // {
+    //   label: (
+    //     <span data-testid="space.library.filter.knowledge.image">
+    //       {I18n.t('library_filter_tags_image')}
+    //     </span>
+    //   ),
+    //   value: 2,
+    // },
   ],
 });
 

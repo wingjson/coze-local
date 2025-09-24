@@ -159,7 +159,7 @@ export const Develop: FC<DevelopProps> = ({ spaceId }) => {
         </Header>
         <SubHeader>
           <SubHeaderFilters>
-            <Select
+            {/* <Select
               className="min-w-[128px]"
               style={
                 isIntelligenceTypeFilterHighlight ? highlightFilterStyle : {}
@@ -191,7 +191,7 @@ export const Develop: FC<DevelopProps> = ({ spaceId }) => {
                   {I18n.t(opt.labelI18NKey)}
                 </Select.Option>
               ))}
-            </Select>
+            </Select> */}
             {!isPersonal ? (
               /**
                * Search Scope
