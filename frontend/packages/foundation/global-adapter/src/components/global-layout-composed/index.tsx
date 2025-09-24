@@ -88,8 +88,8 @@ export const GlobalLayoutComposed: FC<PropsWithChildren> = ({ children }) => {
           // },
           {
             title: I18n.t('menu_title_tmpl'),
-            icon: <IconCozCompass />,
-            activeIcon: <IconCozCompassFill />,
+            icon: <IconCozWorkspace />,
+            activeIcon: <IconCozWorkspaceFill />,
             path: '/explore/template',
             dataTestId: 'layout_explore-button',
           },
