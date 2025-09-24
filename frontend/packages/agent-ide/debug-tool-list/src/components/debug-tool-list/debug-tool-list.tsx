@@ -54,7 +54,7 @@ export const DebugToolList: FC<PropsWithChildren<DebugToolListProps>> = ({
       style={style}
       data-testid="bot-detail.debug-tool-list"
     >
-      <OverflowList
+      {/* <OverflowList
         className={s['tool-overflow-list']}
         items={panes}
         overflowRenderer={() => null}
@@ -72,7 +72,7 @@ export const DebugToolList: FC<PropsWithChildren<DebugToolListProps>> = ({
           </ToolPaneContextProvider>
         )}
         collapseFrom="end"
-      />
+      /> */}
     </div>
   );
 };

@@ -1,7 +1,6 @@
-
 .cm-content {
   .slot-content {
-    color: #4E40E5;
+    color: #4e40e5;
     word-break: break-all;
     background-color: rgba(186, 192, 255, 20%);
 
@@ -25,7 +24,7 @@
   }
 
   .slot-placeholder {
-    color: rgba(148, 152, 247, 70%);
+    color: rgba(71, 128, 255, 70%);
     word-break: break-all;
     background-color: rgba(186, 192, 255, 20%);
 

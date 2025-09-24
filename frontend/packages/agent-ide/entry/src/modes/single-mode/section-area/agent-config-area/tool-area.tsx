@@ -112,13 +112,13 @@ export const ToolArea: React.FC<ToolAreaProps> = props => {
                 desc={I18n.t('bot_ide_knowledge_table_desc')}
               />
 
-              <DataSetArea
+              {/* <DataSetArea
                 initRef={DataSetAreaRef}
                 toolKey={ToolKey.PHOTO}
                 title={I18n.t('knowledge_photo_025')}
                 formatType={FormatType.Image}
                 desc={I18n.t('knowledge_photo_027')}
-              />
+              /> */}
               {knowledgeToolSlot}
             </GroupingContainer>
             <GroupingContainer
