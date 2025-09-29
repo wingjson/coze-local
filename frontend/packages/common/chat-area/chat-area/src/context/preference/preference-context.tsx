@@ -63,7 +63,7 @@ const getDefaultPreference = (): Required<PreferenceContextInterface> => ({
   theme: 'debug',
   enableLegacyUpload: false,
   enableMultimodalUpload: true,
-  fileLimit: 1,
+  fileLimit: 10,
   showInputArea: true,
   showOnboardingMessage: true,
   forceShowOnboardingMessage: false,
