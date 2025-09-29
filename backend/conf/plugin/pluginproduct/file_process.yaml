@@ -72,7 +72,7 @@ paths:
                   data:
                     type: string
                     description: 包含每个图表标题及其对应下载URL的字典。
-                    example: "http://test.com/test.png"
+                    example: 'http://test.com/test.png'
 
   /plug/md-to-word:
     post:
@@ -240,6 +240,8 @@ paths:
                         content:
                           type: string
                         name:
+                          type: string
+                        status:
                           type: string
                   status:
                     type: string
