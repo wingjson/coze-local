@@ -31,11 +31,11 @@ const mergedConfig = defineConfig({
     //   // 配置 `Access-Control-Allow-Origin` CORS 响应头
     //   origin: 'http://172.25.1.180:5173',
     // },
-    // headers: {
-    //   'Access-Control-Allow-Credentials': true,
-    //   'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
-    //   'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
-    // },
+    headers: {
+      'Access-Control-Allow-Credentials': true,
+      'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
+      'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
+    },
     proxy: [
       {
         context: ['/api'],
