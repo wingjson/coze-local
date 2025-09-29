@@ -139,7 +139,7 @@ export const BotDebugChatArea = ({
       }
       isOnboardingCentered
       headerNode={headerNode}
-      fileLimit={10}
+      fileLimit={30}
     />
   );
 };
