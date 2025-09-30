@@ -232,7 +232,7 @@ func PublicDuplicateProduct(ctx context.Context, c *app.RequestContext) {
 				if req.Name != nil && *req.Name != "" {
 					var newNameStr string
 					if originalWorkflow.WorkflowName != nil && *originalWorkflow.WorkflowName != "" {
-						newNameStr = *req.Name + "_" + *originalWorkflow.WorkflowName
+						newNameStr = *originalWorkflow.WorkflowName
 					} else {
 						newNameStr = *req.Name + "_工作流_" + strconv.Itoa(index+1)
 					}
