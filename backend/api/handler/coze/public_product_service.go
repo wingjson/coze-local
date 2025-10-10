@@ -27,7 +27,6 @@ import (
 	product_public_api "github.com/coze-dev/coze-studio/backend/api/model/marketplace/product_public_api"
 	"github.com/coze-dev/coze-studio/backend/api/model/workflow"
 	appworkflow "github.com/coze-dev/coze-studio/backend/application/workflow"
-	"github.com/coze-dev/coze-studio/backend/pkg/lang/ptr"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -202,6 +201,9 @@ func PublicDuplicateProduct(ctx context.Context, c *app.RequestContext) {
 		botInfo, err := singleagent.SingleAgentSVC.GetAgentBotInfo(ctx, &playground.GetDraftBotInfoAgwRequest{
 			BotID: bot.Data.BotID,
 		})
+
+		onboardingData := botInfo.Data.BotInfo.PromptInfo
+		promptString := onboardingData.Prompt
 		if err != nil {
 			internalServerErrorResponse(ctx, c, err)
 			return
@@ -213,72 +215,102 @@ func PublicDuplicateProduct(ctx context.Context, c *app.RequestContext) {
 		//202509-15   add copy workflow
 		newWorkflowList := make([]*bot_common.WorkflowInfo, 0)
 		if botInfo.Data.BotInfo.WorkflowInfoList != nil {
-			spaceIDStr := strconv.FormatInt(req.GetSpaceID(), 10)
 
 			for index, originalWorkflow := range botInfo.Data.BotInfo.WorkflowInfoList {
 				if originalWorkflow == nil || originalWorkflow.WorkflowId == nil {
 					continue
 				}
 
-				workflowResp, err := appworkflow.SVC.CopyWorkflow(ctx, &workflow.CopyWorkflowRequest{
-					WorkflowID: strconv.FormatInt(*originalWorkflow.WorkflowId, 10),
-					SpaceID:    spaceIDStr,
-				})
-				if err != nil {
-					internalServerErrorResponse(ctx, c, err)
-					return
-				}
-				var finalWorkflowName *string
-				if req.Name != nil && *req.Name != "" {
-					var newNameStr string
-					if originalWorkflow.WorkflowName != nil && *originalWorkflow.WorkflowName != "" {
-						newNameStr = *originalWorkflow.WorkflowName
-					} else {
-						newNameStr = *req.Name + "_工作流_" + strconv.Itoa(index+1)
-					}
-					finalWorkflowName = &newNameStr
-					_, err = appworkflow.SVC.UpdateWorkflowMeta(ctx, &workflow.UpdateWorkflowMetaRequest{
-						WorkflowID: workflowResp.Data.WorkflowID,
-						SpaceID:    spaceIDStr,
-						Name:       finalWorkflowName,
+				workflowResp, err := appworkflow.SVC.CopyWkTemplateApi(ctx, &workflow.CopyWkTemplateApiRequest{
+							WorkflowIds:   []string{strconv.FormatInt(*originalWorkflow.WorkflowId, 10)},
+							TargetSpaceID: req.GetSpaceID(),
 					})
-					if err != nil {
-						internalServerErrorResponse(ctx, c, err)
-						return
-					}
-
-					//publish
-					publishReq := &workflow.PublishWorkflowRequest{
-						WorkflowID:         workflowResp.Data.WorkflowID,
-						SpaceID:            spaceIDStr,
-						HasCollaborator:    false,
-						Force:              ptr.Of(true),
-						WorkflowVersion:    ptr.Of("v0.0.1"),
-						VersionDescription: ptr.Of("Copied from template"),
-					}
-					_, err = appworkflow.SVC.PublishWorkflow(ctx, publishReq)
-					if err != nil {
-						internalServerErrorResponse(ctx, c, err)
-						return
-					}
-
-				} else {
-					finalWorkflowName = originalWorkflow.WorkflowName
-				}
-
-				newWorkflowID, err := strconv.ParseInt(workflowResp.Data.WorkflowID, 10, 64)
 				if err != nil {
 					internalServerErrorResponse(ctx, c, err)
 					return
 				}
+				var newWorkflowID int64 // 准备一个变量来存储结果
+				newWorkflowData, ok := workflowResp.Data[*originalWorkflow.WorkflowId]
+				if ok && newWorkflowData != nil {
+							newWorkflowID = newWorkflowData.WorkflowID
+				} else {
+							err := fmt.Errorf("在返回结果中未找到原始ID %d 对应的数据", originalWorkflow.WorkflowId)
+							internalServerErrorResponse(ctx, c, err)
+							return
+				}
+				fmt.Println(index)
+        oldIDStr := strconv.FormatInt(*originalWorkflow.WorkflowId, 10)
+				fmt.Println("==========================================================")
+				fmt.Println(oldIDStr)
+				fmt.Println(*promptString)
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+				fmt.Println("==========================================================")
+        newIDStr := strconv.FormatInt(newWorkflowID, 10)
+        oldBlockIDPart := fmt.Sprintf("id=\"%s\"", oldIDStr)
+        newBlockIDPart := fmt.Sprintf("id=\"%s\"", newIDStr)
+        *promptString = strings.ReplaceAll(*promptString, oldBlockIDPart, newBlockIDPart)
+
+				// var finalWorkflowName *string
+				// if req.Name != nil && *req.Name != "" {
+				// 	var newNameStr string
+				// 	if originalWorkflow.WorkflowName != nil && *originalWorkflow.WorkflowName != "" {
+				// 		newNameStr = *originalWorkflow.WorkflowName
+				// 	} else {
+				// 		newNameStr = *req.Name + "_工作流_" + strconv.Itoa(index+1)
+				// 	}
+				// 	finalWorkflowName = &newNameStr
+				// 	_, err = appworkflow.SVC.UpdateWorkflowMeta(ctx, &workflow.UpdateWorkflowMetaRequest{
+				// 		WorkflowID: workflowResp.Data.WorkflowID,
+				// 		SpaceID:    spaceIDStr,
+				// 		Name:       finalWorkflowName,
+				// 	})
+				// 	if err != nil {
+				// 		internalServerErrorResponse(ctx, c, err)
+				// 		return
+				// 	}
+
+				// 	//publish
+				// 	publishReq := &workflow.PublishWorkflowRequest{
+				// 		WorkflowID:         workflowResp.Data.WorkflowID,
+				// 		SpaceID:            spaceIDStr,
+				// 		HasCollaborator:    false,
+				// 		Force:              ptr.Of(true),
+				// 		WorkflowVersion:    ptr.Of("v0.0.1"),
+				// 		VersionDescription: ptr.Of("Copied from template"),
+				// 	}
+				// 	_, err = appworkflow.SVC.PublishWorkflow(ctx, publishReq)
+				// 	if err != nil {
+				// 		internalServerErrorResponse(ctx, c, err)
+				// 		return
+				// 	}
+
+				// } else {
+				// 	finalWorkflowName = originalWorkflow.WorkflowName
+				// }
+
+				// newWorkflowID, err := strconv.ParseInt(workflowResp.Data[0].WorkflowID, 10, 64)
+				// if err != nil {
+				// 	internalServerErrorResponse(ctx, c, err)
+				// 	return
+				// }
 
 				newWorkflowList = append(newWorkflowList, &bot_common.WorkflowInfo{
 					WorkflowId:   &newWorkflowID,
 					PluginId:     &newWorkflowID,
-					WorkflowName: finalWorkflowName,
+					WorkflowName: originalWorkflow.WorkflowName,
 					FlowMode:     originalWorkflow.FlowMode,
 				})
 			}
+		fmt.Println("================== 🚀 Updated Prompt 🚀 ==================")
+    fmt.Println(*promptString)
+    fmt.Println("==========================================================")
 		}
 
 		modelListResp, err := modelmgr.ModelmgrApplicationSVC.GetModelList(ctx, &developer_api.GetTypeListRequest{})
@@ -300,6 +332,9 @@ func PublicDuplicateProduct(ctx context.Context, c *app.RequestContext) {
 			BotInfo: &bot_common.BotInfoForUpdate{
 				BotId:            &bot.Data.BotID,
 				Name:             req.Name,
+				PromptInfo: &bot_common.PromptInfo{
+            Prompt: promptString,
+        },
 				ModelInfo:        modelInfo,
 				WorkflowInfoList: newWorkflowList,
 			},
