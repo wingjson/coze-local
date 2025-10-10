@@ -3405,7 +3405,7 @@ func (w *ApplicationService) CopyWkTemplateApi(ctx context.Context, req *workflo
 			return nil, err
 		}
 		wf, err := w.copyWorkflow(ctx, wid, vo.CopyWorkflowPolicy{
-			ShouldModifyWorkflowName: true,
+			ShouldModifyWorkflowName: false,
 			TargetSpaceID:            ptr.Of(req.GetTargetSpaceID()),
 			TargetAppID:              ptr.Of(int64(0)),
 		})
