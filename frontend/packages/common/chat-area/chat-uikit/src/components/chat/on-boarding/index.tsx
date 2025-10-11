@@ -182,12 +182,18 @@ export const OnBoarding = forwardRef<HTMLDivElement, OnBoardingProps>(
             showBackground={showBackground}
             onError={() => setBotAvatar(defaultAvatar)}
           />
-          <div className={classNames('chat-uikit-on-boarding__prologue-sug')}>
+          <div
+            className={classNames([
+              'chat-uikit-on-boarding__prologue-sug',
+              'w-full',
+            ])}
+          >
             {prologue ? (
               <div
                 className={classNames(
                   [
                     'py-12px',
+                    'w-full',
                     'px-16px',
                     layout === Layout.MOBILE ? 'text-[16px]' : 'text-lg',
                     'leading-[20px]',
