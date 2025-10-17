@@ -29,6 +29,9 @@ source "$VENV_DIR/bin/activate"
 pip install --upgrade pip
 # If you want to use other third-party libraries, you can install them here.
 pip install urllib3==1.26.16
+pip install seaborn
+pip install pandas
+pip install matplotlib
 pip install h11==0.16.0 httpx==0.28.1 pillow==11.2.1 pdfplumber==0.11.7 python-docx==1.2.0 numpy==2.3.1
 
 if [ $? -ne 0 ]; then

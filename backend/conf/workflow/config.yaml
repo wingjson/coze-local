@@ -2,3 +2,6 @@ NodeOfCodeConfig:
     SupportThirdPartModules:
         - httpx
         - numpy
+        - seaborn
+        - pandas
+        - matplotlib
