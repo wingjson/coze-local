@@ -5,3 +5,4 @@ NodeOfCodeConfig:
         - seaborn
         - pandas
         - matplotlib
+        - requests
