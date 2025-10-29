@@ -965,3 +965,7 @@
       deprecated: false
       method: post
       sub_url: /plug/fill-word-template
+    - tool_id: 230009
+      deprecated: false
+      method: post
+      sub_url: /plug/get-excelmap
