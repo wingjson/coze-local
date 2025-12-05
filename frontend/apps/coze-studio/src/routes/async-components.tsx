@@ -64,7 +64,11 @@ export const AgentIDE = lazy(() =>
     default: res.BotEditor,
   })),
 );
-
+export const AgentIDESingle = lazy(() =>
+  import('@coze-agent-ide/entry-adapter-single').then(res => ({
+    default: res.BotEditor,
+  })),
+);
 // Agent IDE Release Page
 export const AgentPublishPage = lazy(() =>
   import('@coze-agent-ide/agent-publish').then(exps => ({

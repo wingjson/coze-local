@@ -28,6 +28,7 @@ import {
   Develop,
   AgentIDELayout,
   AgentIDE,
+  AgentIDESingle,
   AgentPublishPage,
   Redirect,
   spaceSubMenu,
@@ -132,6 +133,38 @@ export const router: ReturnType<typeof createBrowserRouter> =
                     {
                       index: true,
                       Component: AgentIDE,
+                    },
+                    {
+                      path: 'publish',
+                      children: [
+                        {
+                          index: true,
+                          Component: AgentPublishPage,
+                          loader: () => ({
+                            hasSider: false,
+                            requireBotEditorInit: false,
+                            pageName: 'publish',
+                          }),
+                        },
+                      ],
+                    },
+                  ],
+                  loader: () => ({
+                    hasSider: false,
+                    showMobileTips: true,
+                    requireBotEditorInit: true,
+                    pageName: 'bot',
+                  }),
+                },
+
+                // Agentsingle IDE
+                {
+                  path: 'single/:bot_id',
+                  Component: AgentIDELayout,
+                  children: [
+                    {
+                      index: true,
+                      Component: AgentIDESingle,
                     },
                     {
                       path: 'publish',

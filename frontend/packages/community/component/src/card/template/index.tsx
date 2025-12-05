@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import { type FC, useState} from 'react';
-import { useNavigate} from 'react-router-dom';
+import { type FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import cls from 'classnames';
 import { explore } from '@coze-studio/api-schema';
-import { useSpaceList,useSpaceStore} from '@coze-foundation/space-store';
+import { useSpaceList, useSpaceStore } from '@coze-foundation/space-store';
 import { I18n } from '@coze-arch/i18n';
 import { Image, Input, Modal, Space, Toast } from '@coze-arch/coze-design';
 import { type ProductEntityType } from '@coze-arch/bot-api/product_api';
@@ -30,13 +30,23 @@ import { CardButton } from '../components/button';
 
 type ProductInfo = explore.ProductInfo;
 import styles from './index.module.less';
-// 
-const personalSpaceID = useSpaceStore.getState().getPersonalSpaceID();
-console.log(personalSpaceID)
+
+// // 这里的 personalSpaceID 只是作为兜底或用于 Modal 跳转，主要逻辑我们在组件内获取
+// const personalSpaceID = useSpaceStore.getState().getPersonalSpaceID();
+
 export type TemplateCardProps = ProductInfo;
 
 export const TemplateCard: FC<TemplateCardProps> = props => {
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+
+  // 1. 获取空间列表，提取 spaceId
+  const { spaces } = useSpaceList();
+  const spaceId = spaces?.[0]?.id;
+
+  // 获取是否免费的状态
+  const isFree = props.meta_info?.is_free;
+
   return (
     <CardContainer className={styles.template} shadowMode="default">
       <div className={styles['template-wrapper']}>
@@ -52,11 +62,24 @@ export const TemplateCard: FC<TemplateCardProps> = props => {
         <Space className={styles['btn-container']}>
           <CardButton
             onClick={() => {
-              setVisible(true);
+              if (isFree) {
+                // 免费：弹窗复制
+                setVisible(true);
+              } else {
+                // 收费/其他：直接跳转
+                // 2. 拼接 URL: /space/{spaceId}/single/{productId}
+                // if (spaceId) {
+                navigate(`/space/${spaceId}/single/${props.meta_info.id}`);
+                // } else {
+                //   // 兜底逻辑：如果暂时取不到 spaceId，可以使用 personalSpaceID 或报错
+                //   console.warn('Space ID not found, using personalSpaceID');
+                //   navigate(`/space/${personalSpaceID}/single/${props.meta_info.id}`);
+                // }
+              }
             }}
             className="w-full"
           >
-            {I18n.t('copy')}
+            {isFree ? I18n.t('copy') : I18n.t('use')}
           </CardButton>
         </Space>
       </div>
@@ -74,6 +97,7 @@ export const TemplateCard: FC<TemplateCardProps> = props => {
   );
 };
 
+// ... DuplicateModal, TemplateCardSkeleton, TempCardBody 保持不变 ...
 const DuplicateModal: FC<{
   defaultTitle: string;
   productId: string;

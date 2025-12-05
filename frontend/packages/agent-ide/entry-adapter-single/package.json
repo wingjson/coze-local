@@ -1,5 +1,5 @@
 {
-  "name": "@coze-agent-ide/entry-adapter",
+  "name": "@coze-agent-ide/entry-adapter-single",
   "version": "0.0.1",
   "description": "agent ide entry adapter",
   "license": "Apache-2.0",

@@ -1043,6 +1043,11 @@
       "tags": ["level-3"]
     },
     {
+      "packageName": "@coze-agent-ide/entry-adapter-single",
+      "projectFolder": "frontend/packages/agent-ide/entry-adapter-single",
+      "tags": ["level-3"]
+    },
+    {
       "packageName": "@coze-agent-ide/prompt",
       "projectFolder": "frontend/packages/agent-ide/prompt",
       "tags": ["level-3"]

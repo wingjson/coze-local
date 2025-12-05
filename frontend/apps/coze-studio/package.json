@@ -19,6 +19,7 @@
   "dependencies": {
     "@coze-agent-ide/agent-publish": "workspace:*",
     "@coze-agent-ide/entry-adapter": "workspace:*",
+    "@coze-agent-ide/entry-adapter-single": "workspace:*",
     "@coze-agent-ide/layout-adapter": "workspace:*",
     "@coze-arch/bot-flags": "workspace:*",
     "@coze-arch/bot-md-box-adapter": "workspace:*",
@@ -83,4 +84,3 @@
     "webpack": "~5.91.0"
   }
 }
-
