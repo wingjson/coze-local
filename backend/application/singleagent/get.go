@@ -55,12 +55,13 @@ func (s *SingleAgentApplicationService) GetAgentBotInfo(ctx context.Context, req
 	if err != nil {
 		return nil, err
 	}
-
+	logs.CtxInfof(ctx, "\n\n>>>>>>>>>>>>>>>> [DEBUG CHECK] <<<<<<<<<<<<<<<<\n BotID: %s\n Agent CreatorID (数据库): %d\n Current User UID (当前用户): %d\n Match (是否相等): %v\n>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<\n\n",
+    req.GetBotID(), agentInfo.CreatorID, uid, agentInfo.CreatorID == uid)
 	if agentInfo == nil {
 		return nil, errorx.New(errno.ErrAgentInvalidParamCode, errorx.KVf("msg", "agent %d not found", req.GetBotID()))
 	}
 
-	if agentInfo.CreatorID != uid {
+	if agentInfo.CreatorID != uid && agentInfo.CreatorID != 0{
 		return nil, errorx.New(errno.ErrAgentInvalidParamCode, errorx.KVf("msg", "agent %d not found", req.GetBotID()))
 	}
 
