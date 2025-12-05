@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,7 +20,7 @@ import { DuplicateBot } from '@coze-studio/components';
 import { usePageRuntimeStore } from '@coze-studio/bot-detail-store/page-runtime';
 import { useBotInfoStore } from '@coze-studio/bot-detail-store/bot-info';
 import { useBotDetailIsReadonly } from '@coze-studio/bot-detail-store';
-import { useSpaceStore ,type SpaceStoreState} from '@coze-foundation/space-store-adapter';
+import { useSpaceStore, type SpaceStoreState } from '@coze-foundation/space-store-adapter';
 import {
   Button,
   Form,
@@ -31,7 +31,7 @@ import {
 } from '@coze-arch/coze-design';
 import { IconCozTamplate } from '@coze-arch/coze-design/icons';
 
-import { IconEdit2Stroked ,IconVoteStroked} from '@douyinfe/semi-icons';
+import { IconEdit2Stroked, IconVoteStroked } from '@douyinfe/semi-icons';
 {/* <IconEdit2Stroked /><IconVoteStroked /> */}
 import {
   type BotHeaderProps,
@@ -59,21 +59,28 @@ export const HeaderAddonAfter: React.FC<HeaderAddonAfterProps> = ({
   // add workflow mode 
   // Date:2025/09/11
   const { workflow_mode, setWorkFlowMode } = useSpaceStore(
-    useShallow((state:SpaceStoreState )=> ({
+    useShallow((state: SpaceStoreState) => ({
       workflow_mode: state.workflow_mode,
       setWorkFlowMode: state.setWorkFlowMode,
+    }))
+  );
+
+  const { isTempl, setIsTempl } = useSpaceStore(
+    useShallow((state: SpaceStoreState) => ({
+      isTempl: state.isTempl,
+      setIsTempl: state.setIsTempl,
     }))
   );
 
   const handleToggleMode = () => {
     setWorkFlowMode(!workflow_mode);
   };
-  
+
   return (
     <div className="flex items-center gap-2">
       {/** 3.1 State Zone */}
       <div className="flex items-center gap-2">
-        {/*  3.1.1 Draft Status | Collaboration Status */}
+        {/* 3.1.1 Draft Status | Collaboration Status */}
         {!isReadonly ? <OriginStatus /> : null}
       </div>
       {/** TODO: hzf implicitly associated button, which can be extracted later */}
@@ -88,17 +95,23 @@ export const HeaderAddonAfter: React.FC<HeaderAddonAfterProps> = ({
               {/** Function button area */}
               <MoreMenuButton />
             </div>
-            <IconButton
-              icon={workflow_mode ? <IconVoteStroked /> : <IconEdit2Stroked />}
-              iconPosition="left"
-              color="secondary"
-              size="default"
-              onClick={handleToggleMode}
-             >
-                  {workflow_mode ? '切换发布模式' : '切换调试模式'}
-            </IconButton>
+
+            {/* 修改点 1: 切换按钮增加 !isTempl 判断 */}
+            {!isTempl && (
+              <IconButton
+                icon={workflow_mode ? <IconVoteStroked /> : <IconEdit2Stroked />}
+                iconPosition="left"
+                color="secondary"
+                size="default"
+                onClick={handleToggleMode}
+              >
+                {workflow_mode ? '切换发布模式' : '切换调试模式'}
+              </IconButton>
+            )}
+
             {/** Submit post related button */}
-             {workflow_mode && (
+            {/* 修改点 2: 部署区域增加 !isTempl 判断 */}
+            {!isTempl && workflow_mode && (
               <div className="flex items-center gap-2">
                 {editable ? <DeployButton /> : null}
                 {!editable && botInfo && botId ? (
@@ -107,13 +120,6 @@ export const HeaderAddonAfter: React.FC<HeaderAddonAfterProps> = ({
                 <div id="diff-task-button-container"></div>
               </div>
             )}
-            {/* <div className="flex items-center gap-2">
-              {editable ? <DeployButton /> : null}
-              {!editable && botInfo && botId ? (
-                <DuplicateBot botID={botId} />
-              ) : null}
-              <div id="diff-task-button-container"></div>
-            </div> */}
           </>
         ) : null}
       </div>

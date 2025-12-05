@@ -41,6 +41,7 @@ interface SpaceStoreState {
   inited?: boolean;
   railtoken: string | null;
   workflow_mode: boolean;
+  isTempl: boolean;
   createdTeamSpaceNum: number; // Count of team spaces created by individuals
   maxTeamSpaceNum: number;
   /** @deprecated spaceList & maxTeamSpaceNum */
@@ -56,6 +57,7 @@ interface SpaceStoreAction {
   reset: () => void;
   setRailToken: (railtoken: string | null) => void;
   setWorkFlowMode: (workflow_mode: boolean) => void;
+  setIsTempl: (workflow_mode: boolean) => void;
   /** @deprecated  get id from url */
   getSpaceId: () => string;
   getPersonalSpaceID: () => string | undefined;
@@ -82,6 +84,7 @@ const DEFAULT_MAXIMUM_SPACE = 3;
 export const defaultState: SpaceStoreState = {
   railtoken: null,
   workflow_mode: false,
+  isTempl: true,
   space: {},
   spaceList: [],
   recentlyUsedSpaceList: [],
@@ -110,6 +113,9 @@ export const useSpaceStore = create<SpaceStoreState & SpaceStoreAction>()(
         },
         setWorkFlowMode: (mode: boolean) => {
           set({ workflow_mode: mode }, false, 'setWorkFlowMode');
+        },
+        setIsTempl: (mode: boolean) => {
+          set({ isTempl: mode }, false, 'setIsTempl');
         },
         getSpaceId: () => {
           const { id } = get().space;
