@@ -546,11 +546,11 @@ func (s *SingleAgentApplicationService) ValidateAgentDraftAccess(ctx context.Con
 	if do.SpaceID == consts.TemplateSpaceID { // duplicate template, not need check uid permission
 		return do, nil
 	}
+   logs.CtxInfof(ctx, "\n\n========================================\n[DEBUG PERMISSION] uid(当前用户): %d  |  CreatorID(创建者): %d\n========================================\n\n", *uid, do.CreatorID)
+	if do.CreatorID != *uid && do.CreatorID != 0 {
+    logs.CtxErrorf(ctx, "user(%d) is not the creator(%d) of the agent draft", *uid, do.CreatorID)
 
-	if do.CreatorID != *uid {
-		logs.CtxErrorf(ctx, "user(%d) is not the creator(%d) of the agent draft", *uid, do.CreatorID)
-
-		return do, errorx.New(errno.ErrAgentPermissionCode, errorx.KV("detail", "you are not the agent owner"))
+    return do, errorx.New(errno.ErrAgentPermissionCode, errorx.KV("detail", "you are not the agent owner"))
 	}
 
 	return do, nil
