@@ -79,7 +79,7 @@ export const TemplateCard: FC<TemplateCardProps> = props => {
             }}
             className="w-full"
           >
-            {isFree ? I18n.t('copy') : I18n.t('use')}
+            {isFree ? I18n.t('copy') :"体验"}
           </CardButton>
         </Space>
       </div>
