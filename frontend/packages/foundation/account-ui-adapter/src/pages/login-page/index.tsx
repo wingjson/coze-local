@@ -40,7 +40,7 @@ export const LoginPage: FC = () => {
     <SignFrame brandNode={<CozeBrand isOversea={IS_OVERSEA} />}>
       <SignPanel className="w-[600px] h-[640px] pt-[96px]">
         <div className="flex flex-col items-center w-full h-full">
-          <Favicon />
+          {/* <Favicon /> */}
           <div className="text-[24px] font-medium coze-fg-plug leading-[36px] mt-[32px]">
             {I18n.t('open_source_login_welcome')}
           </div>
@@ -91,7 +91,7 @@ export const LoginPage: FC = () => {
               disabled={submitDisabled || registerLoading}
               onClick={login}
               loading={loginLoading}
-              color="hgltplus"
+              color="primary"
             >
               {I18n.t('login_button_text')}
             </Button>
@@ -105,7 +105,7 @@ export const LoginPage: FC = () => {
             >
               {I18n.t('register')}
             </Button>
-            <div className="mt-[12px] flex justify-center">
+            {/* <div className="mt-[12px] flex justify-center">
               <a
                 data-testid="login.link.terms"
                 href="https://github.com/coze-dev/coze-studio?tab=Apache-2.0-1-ov-file"
@@ -114,7 +114,7 @@ export const LoginPage: FC = () => {
               >
                 {I18n.t('open_source_terms_linkname')}
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </SignPanel>

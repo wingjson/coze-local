@@ -123,7 +123,7 @@ const DuplicateModal: FC<{
           });
           Toast.success(I18n.t('copy_success'));
           hide();
-          navigate(`/space/${personalSpaceID}/develop`, { replace: true });
+          navigate(`/space/${spaceId}/develop`, { replace: true });
         } catch (err) {
           console.error('PublicDuplicateProduct', err);
           Toast.error(I18n.t('copy_failed'));
