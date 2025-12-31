@@ -29,7 +29,7 @@ export const SignFrame: React.FC<PropsWithChildren<SignFrameProps>> = ({
   brandNode,
 }) => (
   <div className={isMobile() ? s['mobile-frame'] : s.frame}>
-    {!isMobile() && <div className={s.brand}>{brandNode}</div>}
+    {/* {!isMobile() && <div className={s.brand}>{brandNode}</div>} */}
     {children}
   </div>
 );
