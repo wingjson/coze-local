@@ -62,7 +62,7 @@ oceanbase:
 redis:
   enabled: true
   image:
-    repository: bitnamilegacy/redis
+    repository: soldevelo/redis
     tag: "8.0"
   aofEnabled: "no"
   port: 6379
