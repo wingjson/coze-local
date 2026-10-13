@@ -83,7 +83,7 @@ services:
       - coze-network
 
   redis:
-    image: bitnamilegacy/redis:8.0
+    image: soldevelo/redis:8.0
     container_name: coze-redis
     user: root
     privileged: true

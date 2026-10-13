@@ -40,7 +40,7 @@ services:
       - coze-network
 
   redis:
-    image: bitnami/redis:8.0
+    image: soldevelo/redis:8.0
     container_name: coze-redis
     restart: always
     user: root

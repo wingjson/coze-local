@@ -12,7 +12,7 @@ TARGET_REGISTRY="opencoze-cn-beijing.cr.volces.com/iac"
 
 images=(
     "mysql:8.4.5"
-    "bitnami/redis:8.0"
+    "soldevelo/redis:8.0"
     "opencoze/opencoze:latest"
     "apache/rocketmq:5.3.2"
     "bitnami/elasticsearch:8.18.0"
